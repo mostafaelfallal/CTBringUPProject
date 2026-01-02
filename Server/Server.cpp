@@ -1,5 +1,6 @@
 #include "Server.h"
 #include "../Common.h"
+#include "Parser.h"
 Server::Server(QObject* parent)
     : QObject(parent), server(new QTcpServer(this))
 {
@@ -27,6 +28,9 @@ void Server::onNewConnection()
 void Server::onClientMessage(const QString& message, ClientContext* sender)
 {
     qDebug() << "Received message from client:" << message;
+    // parse the message
+    QJsonObject jsonMsg = Parser::parseStringToJson(message);
+    qDebug() << "Parsed JSON:" << QJsonDocument(jsonMsg).toJson(QJsonDocument::Compact);
 }
 
 void Server::onClientDisconnected(ClientContext* client)

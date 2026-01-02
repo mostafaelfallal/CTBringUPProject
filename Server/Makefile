@@ -54,11 +54,13 @@ OBJECTS_DIR   = ../build/Server/obj/
 
 SOURCES       = main.cpp \
 		Server.cpp \
-		ClientContext.cpp ../build/Server/moc/moc_Server.cpp \
+		ClientContext.cpp \
+		Parser.cpp ../build/Server/moc/moc_Server.cpp \
 		../build/Server/moc/moc_ClientContext.cpp
 OBJECTS       = ../build/Server/obj/main.o \
 		../build/Server/obj/Server.o \
 		../build/Server/obj/ClientContext.o \
+		../build/Server/obj/Parser.o \
 		../build/Server/obj/moc_Server.o \
 		../build/Server/obj/moc_ClientContext.o
 DIST          = /usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/spec_pre.prf \
@@ -149,9 +151,11 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/yacc.prf \
 		/usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/lex.prf \
 		Server.pro Server.h \
-		ClientContext.h main.cpp \
+		ClientContext.h \
+		Parser.h main.cpp \
 		Server.cpp \
-		ClientContext.cpp
+		ClientContext.cpp \
+		Parser.cpp
 QMAKE_TARGET  = Server
 DESTDIR       = ../build/bin/
 TARGET        = ../build/bin/Server
@@ -360,8 +364,8 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents /usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents Server.h ClientContext.h $(DISTDIR)/
-	$(COPY_FILE) --parents main.cpp Server.cpp ClientContext.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents Server.h ClientContext.h Parser.h $(DISTDIR)/
+	$(COPY_FILE) --parents main.cpp Server.cpp ClientContext.cpp Parser.cpp $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -426,11 +430,15 @@ compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean
 
 ../build/Server/obj/Server.o: Server.cpp Server.h \
 		ClientContext.h \
-		../Common.h
+		../Common.h \
+		Parser.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../build/Server/obj/Server.o Server.cpp
 
 ../build/Server/obj/ClientContext.o: ClientContext.cpp ClientContext.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../build/Server/obj/ClientContext.o ClientContext.cpp
+
+../build/Server/obj/Parser.o: Parser.cpp Parser.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../build/Server/obj/Parser.o Parser.cpp
 
 ../build/Server/obj/moc_Server.o: ../build/Server/moc/moc_Server.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../build/Server/obj/moc_Server.o ../build/Server/moc/moc_Server.cpp

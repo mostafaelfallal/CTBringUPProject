@@ -1,6 +1,6 @@
 # Thinking Phase
 
-- I should create client and tcp server that communicate using text
+- I should create client and tcp server that communicate using text (Done)
 
 - I should create a parser (Text -> JSON)
 - Client Context
