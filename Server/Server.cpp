@@ -1,6 +1,8 @@
 #include "Server.h"
 #include "../Common.h"
 #include "Parser.h"
+#include "Factory.h"
+
 Server::Server(QObject* parent)
     : QObject(parent), server(new QTcpServer(this))
 {
@@ -30,7 +32,19 @@ void Server::onClientMessage(const QString& message, ClientContext* sender)
     qDebug() << "Received message from client:" << message;
     // parse the message
     QJsonObject jsonMsg = Parser::parseStringToJson(message);
-    qDebug() << "Parsed JSON:" << QJsonDocument(jsonMsg).toJson(QJsonDocument::Compact);
+    qDebug() << "Parsed JSON:" << QJsonDocument(jsonMsg).toJson(QJsonDocument::Indented);
+    // Factorty Pattern to get the appropriate Command object could be used here
+    std::unique_ptr<ICommand> command = CommandFactory::createCommand(sender, jsonMsg["action"].toString());
+    QJsonObject response;
+    if (command) {
+        response = command->execute(jsonMsg);
+    }
+    else {
+        response["status"] = "ERROR";
+        response["code"] = 400;
+        response["message"] = "Unknown command.";
+    }
+    qDebug() << "Response JSON:" << QJsonDocument(response).toJson(QJsonDocument::Indented);
 }
 
 void Server::onClientDisconnected(ClientContext* client)

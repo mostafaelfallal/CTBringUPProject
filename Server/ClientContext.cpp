@@ -32,3 +32,11 @@ void ClientContext::onSocketDisconnected()
 {
     emit disconnected(this);
 }
+bool ClientContext::getIsAuthenticated() const
+{
+    return m_isAuthenticated;
+}
+void ClientContext::setIsAuthenticated(bool authStatus)
+{
+    m_isAuthenticated = authStatus;
+}

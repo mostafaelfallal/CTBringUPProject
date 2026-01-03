@@ -5,18 +5,26 @@
 QJsonObject Parser::parseStringToJson(const QString& input) {
     QJsonObject jsonObj;
 
-    // Split the input string into action and arguments
-    QStringList parts = input.split(' ', Qt::SkipEmptyParts);
-    if (parts.isEmpty()) {
-        return jsonObj; // return empty object if input is empty
+    // cmd : <action> arg1;arg2; ... (args may contain spaces but not semicolons)
+    // USE index of first space to separate action and args
+    int firstSpaceIdx = input.indexOf(' ');
+    QString action;
+    QString argsStr;
+    if (firstSpaceIdx == -1) {
+        action = input.trimmed();
+        argsStr = "";
     }
-
-    QString action = parts[0];
+    else {
+        action = input.left(firstSpaceIdx).trimmed();
+        argsStr = input.mid(firstSpaceIdx + 1).trimmed();
+    }
     jsonObj["action"] = action;
-
-    if (parts.size() > 1) {
-        QString argsStr = parts[1];
-        QStringList argsList = argsStr.split(';', Qt::SkipEmptyParts);
+    QStringList argsList;
+    if (!argsStr.isEmpty()) {
+        argsList = argsStr.split(';', Qt::SkipEmptyParts);
+        for (QString& arg : argsList) {
+            arg = arg.trimmed();
+        }
         QJsonArray argsArray;
         for (const QString& arg : argsList) {
             argsArray.append(arg);
@@ -24,8 +32,11 @@ QJsonObject Parser::parseStringToJson(const QString& input) {
         jsonObj["args"] = argsArray;
     }
     else {
-        jsonObj["args"] = QJsonArray(); // empty args array
+        jsonObj["args"] = QJsonArray(); // empty array
     }
-
     return jsonObj;
+}
+
+QString Parser::jsonToString(const QJsonObject& jsonObj) {
+    return QString(QJsonDocument(jsonObj).toJson(QJsonDocument::Compact));
 }

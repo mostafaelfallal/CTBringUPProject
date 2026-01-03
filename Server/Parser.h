@@ -11,6 +11,7 @@
 class Parser {
     public:
     static QJsonObject parseStringToJson(const QString& input);
+    static QString jsonToString(const QJsonObject& jsonObj);
 };
 
 #endif // PARSER_H

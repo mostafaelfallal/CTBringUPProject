@@ -55,12 +55,16 @@ OBJECTS_DIR   = ../build/Server/obj/
 SOURCES       = main.cpp \
 		Server.cpp \
 		ClientContext.cpp \
-		Parser.cpp ../build/Server/moc/moc_Server.cpp \
+		Parser.cpp \
+		Command.cpp \
+		Factory.cpp ../build/Server/moc/moc_Server.cpp \
 		../build/Server/moc/moc_ClientContext.cpp
 OBJECTS       = ../build/Server/obj/main.o \
 		../build/Server/obj/Server.o \
 		../build/Server/obj/ClientContext.o \
 		../build/Server/obj/Parser.o \
+		../build/Server/obj/Command.o \
+		../build/Server/obj/Factory.o \
 		../build/Server/obj/moc_Server.o \
 		../build/Server/obj/moc_ClientContext.o
 DIST          = /usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/spec_pre.prf \
@@ -152,10 +156,14 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/lex.prf \
 		Server.pro Server.h \
 		ClientContext.h \
-		Parser.h main.cpp \
+		Parser.h \
+		Command.h \
+		Factory.h main.cpp \
 		Server.cpp \
 		ClientContext.cpp \
-		Parser.cpp
+		Parser.cpp \
+		Command.cpp \
+		Factory.cpp
 QMAKE_TARGET  = Server
 DESTDIR       = ../build/bin/
 TARGET        = ../build/bin/Server
@@ -364,8 +372,8 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents /usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents Server.h ClientContext.h Parser.h $(DISTDIR)/
-	$(COPY_FILE) --parents main.cpp Server.cpp ClientContext.cpp Parser.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents Server.h ClientContext.h Parser.h Command.h Factory.h $(DISTDIR)/
+	$(COPY_FILE) --parents main.cpp Server.cpp ClientContext.cpp Parser.cpp Command.cpp Factory.cpp $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -439,6 +447,18 @@ compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean
 
 ../build/Server/obj/Parser.o: Parser.cpp Parser.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../build/Server/obj/Parser.o Parser.cpp
+
+../build/Server/obj/Command.o: Command.cpp Command.h \
+		ICommand.h \
+		ClientContext.h \
+		../Common.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../build/Server/obj/Command.o Command.cpp
+
+../build/Server/obj/Factory.o: Factory.cpp Factory.h \
+		Command.h \
+		ICommand.h \
+		ClientContext.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../build/Server/obj/Factory.o Factory.cpp
 
 ../build/Server/obj/moc_Server.o: ../build/Server/moc/moc_Server.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../build/Server/obj/moc_Server.o ../build/Server/moc/moc_Server.cpp
