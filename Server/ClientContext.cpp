@@ -3,7 +3,7 @@
 ClientContext::ClientContext(QTcpSocket* socket, QObject* parent)
     : QObject(parent), m_socket(socket)
 {
-    m_socket->setParent(this); // Ensure socket is deleted with ClientContext
+    m_socket->setParent(this);
     connect(m_socket, &QTcpSocket::readyRead, this, &ClientContext::onReadyRead);
     connect(m_socket, &QTcpSocket::disconnected, this, &ClientContext::onSocketDisconnected);
 }

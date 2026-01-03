@@ -58,7 +58,7 @@ class ListCommand : public BaseCommand {
     using BaseCommand::BaseCommand;
     protected:
     CommandResult perform(const QStringList& args) override;
-    // minArgs defaults to 0, which is correct here
+    int minArgs() const override { return 0; }
 };
 
 class RenameCommand : public BaseCommand {

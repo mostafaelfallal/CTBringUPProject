@@ -9,7 +9,7 @@
 CommandResult withFile(const QString& filename, QIODevice::OpenMode mode, std::function<CommandResult(QFile&)> action)
 {
     QFile file(filename);
-    if (!file.exists() && !(mode & QIODevice::WriteOnly)) // Create/Write usually don't need exists check this way
+    if (!file.exists() && !(mode & QIODevice::WriteOnly))
     {
         return CommandResult::Error(404, "File not found.");
     }
@@ -25,7 +25,6 @@ CommandResult withFile(const QString& filename, QIODevice::OpenMode mode, std::f
 }
 bool isValidFilename(const QString& filename)
 {
-    // Basic validation: no path traversal or invalid characters
     if (filename.contains("/") || filename.contains("..") || filename.startsWith("/") || filename.startsWith(".") || filename.contains("~"))
     {
         return false;
@@ -73,7 +72,6 @@ CommandResult CreateCommand::perform(const QStringList& args)
 
 CommandResult WriteCommand::perform(const QStringList& args)
 {
-    // Checks existence first (per original logic) then opens Truncate
     QFile file(args[0]);
     if (isValidFilename(args[0]) == false)
     {

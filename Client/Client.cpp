@@ -29,6 +29,7 @@ void Client::sendData(const QString& text)
         socket->flush();
     }
     else {
-        qDebug() << "Not connected!";
+        qDebug() << "Not connected, trying to reconnect...";
+        connectToServer();
     }
 }

@@ -2,29 +2,29 @@
 #include <QStringList>
 #include <QJsonDocument>
 
-QJsonObject Parser::parseStringToJson(const QString& input) {
+QJsonObject Parser::parseStringToJson(const QString& inputRaw) {
     QJsonObject jsonObj;
+    QString input = inputRaw.trimmed();
 
-    // cmd : <action> arg1;arg2; ... (args may contain spaces but not semicolons)
-    // USE index of first space to separate action and args
     int firstSpaceIdx = input.indexOf(' ');
     QString action;
     QString argsStr;
+
     if (firstSpaceIdx == -1) {
-        action = input.trimmed();
+        action = input;
         argsStr = "";
     }
     else {
-        action = input.left(firstSpaceIdx).trimmed();
+        action = input.left(firstSpaceIdx);
         argsStr = input.mid(firstSpaceIdx + 1).trimmed();
     }
     jsonObj["action"] = action;
     QStringList argsList;
     if (!argsStr.isEmpty()) {
         argsList = argsStr.split(';', Qt::SkipEmptyParts);
-        for (QString& arg : argsList) {
-            arg = arg.trimmed();
-        }
+        // for (QString& arg : argsList) {
+        //     arg = arg.trimmed();
+        // }
         QJsonArray argsArray;
         for (const QString& arg : argsList) {
             argsArray.append(arg);
@@ -38,7 +38,6 @@ QJsonObject Parser::parseStringToJson(const QString& input) {
 }
 
 QString Parser::jsonToString(const QJsonObject& jsonObj) {
-    // Status + Code (if present) + Message
     QStringList parts;
     parts.append(jsonObj["status"].toString());
     if (jsonObj.contains("code")) {

@@ -10,7 +10,7 @@ class ClientContext : public QObject
     public:
     explicit ClientContext(QTcpSocket* socket, QObject* parent = nullptr);
     void sendMessage(const QByteArray& message);
-    QTcpSocket* getSocket(); // useful for logging
+    QTcpSocket* getSocket();
     bool getIsAuthenticated() const;
     void setIsAuthenticated(bool authStatus);
 
