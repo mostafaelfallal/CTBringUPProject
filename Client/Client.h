@@ -17,7 +17,10 @@ class Client : public QObject
     private slots:
     void onConnected();
     void onReadyRead();
+    void onDisconnected();
 
+    signals:
+    void disconnected();
     private:
     QTcpSocket* socket;
 };

@@ -5,6 +5,9 @@ Client::Client(QObject* parent)
 {
     connect(socket, &QTcpSocket::connected, this, &Client::onConnected);
     connect(socket, &QTcpSocket::readyRead, this, &Client::onReadyRead);
+    connect(socket, &QTcpSocket::disconnected, this, [this]() {
+        onDisconnected();
+            });
 }
 
 void Client::connectToServer()
@@ -32,4 +35,10 @@ void Client::sendData(const QString& text)
         qDebug() << "Not connected, trying to reconnect...";
         connectToServer();
     }
+}
+
+void Client::onDisconnected()
+{
+    qDebug() << "Disconnected from server.";
+    emit disconnected();
 }

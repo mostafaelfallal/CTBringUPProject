@@ -20,10 +20,14 @@ int main(int argc, char* argv[])
     QObject::connect(worker, &InputWorker::userInputReceived, &client, &Client::sendData);
 
     // Cleanup hooks
-
-    QObject::connect(&a, &QCoreApplication::aboutToQuit, &workerThread, &QThread::quit);
     QObject::connect(&workerThread, &QThread::finished, worker, &QObject::deleteLater);
+    QObject::connect(&client, &Client::disconnected, &a, &QCoreApplication::quit);
+
     workerThread.start();
 
-    return a.exec();
+
+    int result = a.exec();
+    workerThread.quit();
+    workerThread.wait();
+    return result;
 }
