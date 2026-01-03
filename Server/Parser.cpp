@@ -38,5 +38,12 @@ QJsonObject Parser::parseStringToJson(const QString& input) {
 }
 
 QString Parser::jsonToString(const QJsonObject& jsonObj) {
-    return QString(QJsonDocument(jsonObj).toJson(QJsonDocument::Compact));
+    // Status + Code (if present) + Message
+    QStringList parts;
+    parts.append(jsonObj["status"].toString());
+    if (jsonObj.contains("code")) {
+        parts.append(QString::number(jsonObj["code"].toInt()));
+    }
+    parts.append(jsonObj["message"].toString());
+    return parts.join(' ');
 }

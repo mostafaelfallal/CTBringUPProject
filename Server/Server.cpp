@@ -45,6 +45,8 @@ void Server::onClientMessage(const QString& message, ClientContext* sender)
         response["message"] = "Unknown command.";
     }
     qDebug() << "Response JSON:" << QJsonDocument(response).toJson(QJsonDocument::Indented);
+    QString responseStr = Parser::jsonToString(response) + "\n";
+    sender->sendMessage(responseStr.toUtf8());
 }
 
 void Server::onClientDisconnected(ClientContext* client)

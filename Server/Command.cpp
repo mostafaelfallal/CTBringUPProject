@@ -23,7 +23,15 @@ CommandResult withFile(const QString& filename, QIODevice::OpenMode mode, std::f
     file.close();
     return res;
 }
-
+bool isValidFilename(const QString& filename)
+{
+    // Basic validation: no path traversal or invalid characters
+    if (filename.contains("/") || filename.contains("..") || filename.startsWith("/") || filename.startsWith(".") || filename.contains("~"))
+    {
+        return false;
+    }
+    return true;
+}
 // --- Command Implementations ---
 
 CommandResult AuthCommand::perform(const QStringList& args)
@@ -44,7 +52,7 @@ CommandResult AuthCommand::perform(const QStringList& args)
 CommandResult CreateCommand::perform(const QStringList& args)
 {
     QString filename = args[0];
-    if (filename.contains("/") || filename.contains("..") || filename.startsWith("/"))
+    if (!isValidFilename(filename))
     {
         return CommandResult::Error(400, "Invalid filename.");
     }
@@ -67,6 +75,10 @@ CommandResult WriteCommand::perform(const QStringList& args)
 {
     // Checks existence first (per original logic) then opens Truncate
     QFile file(args[0]);
+    if (isValidFilename(args[0]) == false)
+    {
+        return CommandResult::Error(400, "Invalid filename.");
+    }
     if (!file.exists()) return CommandResult::Error(404, "File not found.");
 
     return withFile(args[0], QIODevice::WriteOnly | QIODevice::Truncate, [&](QFile& file) {
@@ -78,6 +90,10 @@ CommandResult WriteCommand::perform(const QStringList& args)
 
 CommandResult ReadCommand::perform(const QStringList& args)
 {
+    if (isValidFilename(args[0]) == false)
+    {
+        return CommandResult::Error(400, "Invalid filename.");
+    }
     return withFile(args[0], QIODevice::ReadOnly, [&](QFile& file) {
         QTextStream in(&file);
         QString content = in.readAll();
@@ -90,7 +106,10 @@ CommandResult ReadCommand::perform(const QStringList& args)
 
 CommandResult AppendCommand::perform(const QStringList& args)
 {
-    // Original logic: Check exists -> Open Append
+    if (isValidFilename(args[0]) == false)
+    {
+        return CommandResult::Error(400, "Invalid filename.");
+    }
     QFile file(args[0]);
     if (!file.exists()) return CommandResult::Error(404, "File not found.");
 
@@ -103,6 +122,10 @@ CommandResult AppendCommand::perform(const QStringList& args)
 
 CommandResult DeleteCommand::perform(const QStringList& args)
 {
+    if (isValidFilename(args[0]) == false)
+    {
+        return CommandResult::Error(400, "Invalid filename.");
+    }
     QFile file(args[0]);
     if (!file.exists()) return CommandResult::Error(404, "File not found.");
 
@@ -121,6 +144,10 @@ CommandResult ListCommand::perform(const QStringList& args)
 
 CommandResult RenameCommand::perform(const QStringList& args)
 {
+    if (isValidFilename(args[0]) == false)
+    {
+        return CommandResult::Error(400, "Invalid filename.");
+    }
     QFile file(args[0]);
     if (!file.exists()) return CommandResult::Error(404, "File not found.");
 
@@ -131,6 +158,10 @@ CommandResult RenameCommand::perform(const QStringList& args)
 
 CommandResult InfoCommand::perform(const QStringList& args)
 {
+    if (isValidFilename(args[0]) == false)
+    {
+        return CommandResult::Error(400, "Invalid filename.");
+    }
     QFile file(args[0]);
     if (!file.exists()) return CommandResult::Error(404, "File not found.");
 
