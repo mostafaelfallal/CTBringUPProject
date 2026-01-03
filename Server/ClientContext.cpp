@@ -23,9 +23,11 @@ QTcpSocket* ClientContext::getSocket()
 
 void ClientContext::onReadyRead()
 {
-    QByteArray data = m_socket->readAll();
-    QString msg = QString::fromUtf8(data).trimmed();
-    if (!msg.isEmpty()) emit messageReceived(msg, this);
+    while (m_socket->canReadLine()) {
+        QByteArray data = m_socket->readLine();
+        QString msg = QString::fromUtf8(data).trimmed();
+        if (!msg.isEmpty()) emit messageReceived(msg, this);
+    }
 }
 
 void ClientContext::onSocketDisconnected()

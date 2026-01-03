@@ -5,9 +5,7 @@ Client::Client(QObject* parent)
 {
     connect(socket, &QTcpSocket::connected, this, &Client::onConnected);
     connect(socket, &QTcpSocket::readyRead, this, &Client::onReadyRead);
-    connect(socket, &QTcpSocket::disconnected, this, [this]() {
-        onDisconnected();
-            });
+    connect(socket, &QTcpSocket::disconnected, this, &Client::onDisconnected);
 }
 
 void Client::connectToServer()
@@ -17,7 +15,12 @@ void Client::connectToServer()
 
 void Client::onConnected()
 {
-    qDebug() << "Connected to server.";
+    qDebug() << "Connected to server, sending buffered messages...";
+    while (!m_queue.isEmpty()) {
+        QString msg = m_queue.pop();
+        qDebug() << "Sending buffered: " << msg;
+        sendData(msg);
+    }
 }
 
 void Client::onReadyRead()
@@ -27,13 +30,15 @@ void Client::onReadyRead()
 
 void Client::sendData(const QString& text)
 {
-    if (socket->state() == QAbstractSocket::ConnectedState) {
-        socket->write(text.toUtf8());
-        socket->flush();
+    if (socket->state() != QAbstractSocket::ConnectedState) {
+        qDebug() << "Server offline. Queuing: " << text;
+        m_queue.push(text);
+        connectToServer();
     }
     else {
-        qDebug() << "Not connected, trying to reconnect...";
-        connectToServer();
+        socket->write((text + "\n").toUtf8());
+        socket->flush();
+
     }
 }
 

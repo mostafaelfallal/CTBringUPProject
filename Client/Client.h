@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include <QTcpSocket>
+#include "MessageBuffer.h"
 
 class Client : public QObject
 {
@@ -21,8 +22,11 @@ class Client : public QObject
 
     signals:
     void disconnected();
+
     private:
     QTcpSocket* socket;
+
+    MessageBuffer m_queue;
 };
 
 #endif // CLIENT_H
