@@ -30,7 +30,7 @@ MOVE          = mv -f
 TAR           = tar -cf
 COMPRESS      = gzip -9f
 DISTNAME      = Project1.0.0
-DISTDIR = /mnt/e/WorkSpace/QT/BringUpProject/.tmp/Project1.0.0
+DISTDIR = /mnt/c/Users/Mostafa.elfallal/Documents/workspace/CTBringUPProject/.tmp/Project1.0.0
 SUBTARGETS    =  \
 		sub-Server \
 		sub-Client \
@@ -39,79 +39,79 @@ SUBTARGETS    =  \
 
 sub-Server-qmake_all:  FORCE
 	@test -d Server/ || mkdir -p Server/
-	cd Server/ && $(QMAKE) -o Makefile /mnt/e/WorkSpace/QT/BringUpProject/Server/Server.pro
+	cd Server/ && $(QMAKE) -o Makefile /mnt/c/Users/Mostafa.elfallal/Documents/workspace/CTBringUPProject/Server/Server.pro
 	cd Server/ && $(MAKE) -f Makefile qmake_all
 sub-Server: FORCE
 	@test -d Server/ || mkdir -p Server/
-	cd Server/ && ( test -e Makefile || $(QMAKE) -o Makefile /mnt/e/WorkSpace/QT/BringUpProject/Server/Server.pro ) && $(MAKE) -f Makefile
+	cd Server/ && ( test -e Makefile || $(QMAKE) -o Makefile /mnt/c/Users/Mostafa.elfallal/Documents/workspace/CTBringUPProject/Server/Server.pro ) && $(MAKE) -f Makefile
 sub-Server-make_first: FORCE
 	@test -d Server/ || mkdir -p Server/
-	cd Server/ && ( test -e Makefile || $(QMAKE) -o Makefile /mnt/e/WorkSpace/QT/BringUpProject/Server/Server.pro ) && $(MAKE) -f Makefile 
+	cd Server/ && ( test -e Makefile || $(QMAKE) -o Makefile /mnt/c/Users/Mostafa.elfallal/Documents/workspace/CTBringUPProject/Server/Server.pro ) && $(MAKE) -f Makefile 
 sub-Server-all: FORCE
 	@test -d Server/ || mkdir -p Server/
-	cd Server/ && ( test -e Makefile || $(QMAKE) -o Makefile /mnt/e/WorkSpace/QT/BringUpProject/Server/Server.pro ) && $(MAKE) -f Makefile all
+	cd Server/ && ( test -e Makefile || $(QMAKE) -o Makefile /mnt/c/Users/Mostafa.elfallal/Documents/workspace/CTBringUPProject/Server/Server.pro ) && $(MAKE) -f Makefile all
 sub-Server-clean: FORCE
 	@test -d Server/ || mkdir -p Server/
-	cd Server/ && ( test -e Makefile || $(QMAKE) -o Makefile /mnt/e/WorkSpace/QT/BringUpProject/Server/Server.pro ) && $(MAKE) -f Makefile clean
+	cd Server/ && ( test -e Makefile || $(QMAKE) -o Makefile /mnt/c/Users/Mostafa.elfallal/Documents/workspace/CTBringUPProject/Server/Server.pro ) && $(MAKE) -f Makefile clean
 sub-Server-distclean: FORCE
 	@test -d Server/ || mkdir -p Server/
-	cd Server/ && ( test -e Makefile || $(QMAKE) -o Makefile /mnt/e/WorkSpace/QT/BringUpProject/Server/Server.pro ) && $(MAKE) -f Makefile distclean
+	cd Server/ && ( test -e Makefile || $(QMAKE) -o Makefile /mnt/c/Users/Mostafa.elfallal/Documents/workspace/CTBringUPProject/Server/Server.pro ) && $(MAKE) -f Makefile distclean
 sub-Server-install_subtargets: FORCE
 	@test -d Server/ || mkdir -p Server/
-	cd Server/ && ( test -e Makefile || $(QMAKE) -o Makefile /mnt/e/WorkSpace/QT/BringUpProject/Server/Server.pro ) && $(MAKE) -f Makefile install
+	cd Server/ && ( test -e Makefile || $(QMAKE) -o Makefile /mnt/c/Users/Mostafa.elfallal/Documents/workspace/CTBringUPProject/Server/Server.pro ) && $(MAKE) -f Makefile install
 sub-Server-uninstall_subtargets: FORCE
 	@test -d Server/ || mkdir -p Server/
-	cd Server/ && ( test -e Makefile || $(QMAKE) -o Makefile /mnt/e/WorkSpace/QT/BringUpProject/Server/Server.pro ) && $(MAKE) -f Makefile uninstall
+	cd Server/ && ( test -e Makefile || $(QMAKE) -o Makefile /mnt/c/Users/Mostafa.elfallal/Documents/workspace/CTBringUPProject/Server/Server.pro ) && $(MAKE) -f Makefile uninstall
 sub-Client-qmake_all:  FORCE
 	@test -d Client/ || mkdir -p Client/
-	cd Client/ && $(QMAKE) -o Makefile /mnt/e/WorkSpace/QT/BringUpProject/Client/Client.pro
+	cd Client/ && $(QMAKE) -o Makefile /mnt/c/Users/Mostafa.elfallal/Documents/workspace/CTBringUPProject/Client/Client.pro
 	cd Client/ && $(MAKE) -f Makefile qmake_all
 sub-Client: FORCE
 	@test -d Client/ || mkdir -p Client/
-	cd Client/ && ( test -e Makefile || $(QMAKE) -o Makefile /mnt/e/WorkSpace/QT/BringUpProject/Client/Client.pro ) && $(MAKE) -f Makefile
+	cd Client/ && ( test -e Makefile || $(QMAKE) -o Makefile /mnt/c/Users/Mostafa.elfallal/Documents/workspace/CTBringUPProject/Client/Client.pro ) && $(MAKE) -f Makefile
 sub-Client-make_first: FORCE
 	@test -d Client/ || mkdir -p Client/
-	cd Client/ && ( test -e Makefile || $(QMAKE) -o Makefile /mnt/e/WorkSpace/QT/BringUpProject/Client/Client.pro ) && $(MAKE) -f Makefile 
+	cd Client/ && ( test -e Makefile || $(QMAKE) -o Makefile /mnt/c/Users/Mostafa.elfallal/Documents/workspace/CTBringUPProject/Client/Client.pro ) && $(MAKE) -f Makefile 
 sub-Client-all: FORCE
 	@test -d Client/ || mkdir -p Client/
-	cd Client/ && ( test -e Makefile || $(QMAKE) -o Makefile /mnt/e/WorkSpace/QT/BringUpProject/Client/Client.pro ) && $(MAKE) -f Makefile all
+	cd Client/ && ( test -e Makefile || $(QMAKE) -o Makefile /mnt/c/Users/Mostafa.elfallal/Documents/workspace/CTBringUPProject/Client/Client.pro ) && $(MAKE) -f Makefile all
 sub-Client-clean: FORCE
 	@test -d Client/ || mkdir -p Client/
-	cd Client/ && ( test -e Makefile || $(QMAKE) -o Makefile /mnt/e/WorkSpace/QT/BringUpProject/Client/Client.pro ) && $(MAKE) -f Makefile clean
+	cd Client/ && ( test -e Makefile || $(QMAKE) -o Makefile /mnt/c/Users/Mostafa.elfallal/Documents/workspace/CTBringUPProject/Client/Client.pro ) && $(MAKE) -f Makefile clean
 sub-Client-distclean: FORCE
 	@test -d Client/ || mkdir -p Client/
-	cd Client/ && ( test -e Makefile || $(QMAKE) -o Makefile /mnt/e/WorkSpace/QT/BringUpProject/Client/Client.pro ) && $(MAKE) -f Makefile distclean
+	cd Client/ && ( test -e Makefile || $(QMAKE) -o Makefile /mnt/c/Users/Mostafa.elfallal/Documents/workspace/CTBringUPProject/Client/Client.pro ) && $(MAKE) -f Makefile distclean
 sub-Client-install_subtargets: FORCE
 	@test -d Client/ || mkdir -p Client/
-	cd Client/ && ( test -e Makefile || $(QMAKE) -o Makefile /mnt/e/WorkSpace/QT/BringUpProject/Client/Client.pro ) && $(MAKE) -f Makefile install
+	cd Client/ && ( test -e Makefile || $(QMAKE) -o Makefile /mnt/c/Users/Mostafa.elfallal/Documents/workspace/CTBringUPProject/Client/Client.pro ) && $(MAKE) -f Makefile install
 sub-Client-uninstall_subtargets: FORCE
 	@test -d Client/ || mkdir -p Client/
-	cd Client/ && ( test -e Makefile || $(QMAKE) -o Makefile /mnt/e/WorkSpace/QT/BringUpProject/Client/Client.pro ) && $(MAKE) -f Makefile uninstall
+	cd Client/ && ( test -e Makefile || $(QMAKE) -o Makefile /mnt/c/Users/Mostafa.elfallal/Documents/workspace/CTBringUPProject/Client/Client.pro ) && $(MAKE) -f Makefile uninstall
 sub-Tests-qmake_all:  FORCE
 	@test -d Tests/ || mkdir -p Tests/
-	cd Tests/ && $(QMAKE) -o Makefile /mnt/e/WorkSpace/QT/BringUpProject/Tests/Tests.pro
+	cd Tests/ && $(QMAKE) -o Makefile /mnt/c/Users/Mostafa.elfallal/Documents/workspace/CTBringUPProject/Tests/Tests.pro
 	cd Tests/ && $(MAKE) -f Makefile qmake_all
 sub-Tests: FORCE
 	@test -d Tests/ || mkdir -p Tests/
-	cd Tests/ && ( test -e Makefile || $(QMAKE) -o Makefile /mnt/e/WorkSpace/QT/BringUpProject/Tests/Tests.pro ) && $(MAKE) -f Makefile
+	cd Tests/ && ( test -e Makefile || $(QMAKE) -o Makefile /mnt/c/Users/Mostafa.elfallal/Documents/workspace/CTBringUPProject/Tests/Tests.pro ) && $(MAKE) -f Makefile
 sub-Tests-make_first: FORCE
 	@test -d Tests/ || mkdir -p Tests/
-	cd Tests/ && ( test -e Makefile || $(QMAKE) -o Makefile /mnt/e/WorkSpace/QT/BringUpProject/Tests/Tests.pro ) && $(MAKE) -f Makefile 
+	cd Tests/ && ( test -e Makefile || $(QMAKE) -o Makefile /mnt/c/Users/Mostafa.elfallal/Documents/workspace/CTBringUPProject/Tests/Tests.pro ) && $(MAKE) -f Makefile 
 sub-Tests-all: FORCE
 	@test -d Tests/ || mkdir -p Tests/
-	cd Tests/ && ( test -e Makefile || $(QMAKE) -o Makefile /mnt/e/WorkSpace/QT/BringUpProject/Tests/Tests.pro ) && $(MAKE) -f Makefile all
+	cd Tests/ && ( test -e Makefile || $(QMAKE) -o Makefile /mnt/c/Users/Mostafa.elfallal/Documents/workspace/CTBringUPProject/Tests/Tests.pro ) && $(MAKE) -f Makefile all
 sub-Tests-clean: FORCE
 	@test -d Tests/ || mkdir -p Tests/
-	cd Tests/ && ( test -e Makefile || $(QMAKE) -o Makefile /mnt/e/WorkSpace/QT/BringUpProject/Tests/Tests.pro ) && $(MAKE) -f Makefile clean
+	cd Tests/ && ( test -e Makefile || $(QMAKE) -o Makefile /mnt/c/Users/Mostafa.elfallal/Documents/workspace/CTBringUPProject/Tests/Tests.pro ) && $(MAKE) -f Makefile clean
 sub-Tests-distclean: FORCE
 	@test -d Tests/ || mkdir -p Tests/
-	cd Tests/ && ( test -e Makefile || $(QMAKE) -o Makefile /mnt/e/WorkSpace/QT/BringUpProject/Tests/Tests.pro ) && $(MAKE) -f Makefile distclean
+	cd Tests/ && ( test -e Makefile || $(QMAKE) -o Makefile /mnt/c/Users/Mostafa.elfallal/Documents/workspace/CTBringUPProject/Tests/Tests.pro ) && $(MAKE) -f Makefile distclean
 sub-Tests-install_subtargets: FORCE
 	@test -d Tests/ || mkdir -p Tests/
-	cd Tests/ && ( test -e Makefile || $(QMAKE) -o Makefile /mnt/e/WorkSpace/QT/BringUpProject/Tests/Tests.pro ) && $(MAKE) -f Makefile install
+	cd Tests/ && ( test -e Makefile || $(QMAKE) -o Makefile /mnt/c/Users/Mostafa.elfallal/Documents/workspace/CTBringUPProject/Tests/Tests.pro ) && $(MAKE) -f Makefile install
 sub-Tests-uninstall_subtargets: FORCE
 	@test -d Tests/ || mkdir -p Tests/
-	cd Tests/ && ( test -e Makefile || $(QMAKE) -o Makefile /mnt/e/WorkSpace/QT/BringUpProject/Tests/Tests.pro ) && $(MAKE) -f Makefile uninstall
+	cd Tests/ && ( test -e Makefile || $(QMAKE) -o Makefile /mnt/c/Users/Mostafa.elfallal/Documents/workspace/CTBringUPProject/Tests/Tests.pro ) && $(MAKE) -f Makefile uninstall
 
 Makefile: Project.pro /usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++/qmake.conf /usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt6/mkspecs/common/unix.conf \
@@ -128,6 +128,7 @@ Makefile: Project.pro /usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++/qmake.conf
 		/usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_core_private.pri \
 		/usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_dbus.pri \
 		/usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_dbus_private.pri \
+		/usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_designer.pri \
 		/usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_devicediscovery_support_private.pri \
 		/usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_eglfs_kms_gbm_support_private.pri \
 		/usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_eglfs_kms_support_private.pri \
@@ -135,14 +136,10 @@ Makefile: Project.pro /usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++/qmake.conf
 		/usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_fb_support_private.pri \
 		/usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_gui.pri \
 		/usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_gui_private.pri \
+		/usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_help.pri \
 		/usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_input_support_private.pri \
 		/usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_kms_support_private.pri \
-		/usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_labsanimation.pri \
-		/usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_labsfolderlistmodel.pri \
-		/usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_labsqmlmodels.pri \
-		/usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_labssettings.pri \
-		/usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_labssharedimage.pri \
-		/usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_labswavefrontmesh.pri \
+		/usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_linguist.pri \
 		/usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_network.pri \
 		/usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_network_private.pri \
 		/usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_opengl.pri \
@@ -151,27 +148,12 @@ Makefile: Project.pro /usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++/qmake.conf
 		/usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_openglwidgets_private.pri \
 		/usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_printsupport.pri \
 		/usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_printsupport_private.pri \
-		/usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_qml.pri \
-		/usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_qmlcore.pri \
-		/usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_qmlintegration.pri \
-		/usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_qmllocalstorage.pri \
-		/usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_qmlmodels.pri \
-		/usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_qmltest.pri \
-		/usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_qmlworkerscript.pri \
-		/usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_qmlxmllistmodel.pri \
-		/usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_quick.pri \
-		/usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_quickcontrols2.pri \
-		/usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_quickcontrols2impl.pri \
-		/usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_quickdialogs2.pri \
-		/usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_quickdialogs2quickimpl.pri \
-		/usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_quickdialogs2utils.pri \
-		/usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_quicklayouts.pri \
-		/usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_quicktemplates2.pri \
-		/usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_quickwidgets.pri \
 		/usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_sql.pri \
 		/usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_sql_private.pri \
 		/usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_testlib.pri \
 		/usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_testlib_private.pri \
+		/usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_uiplugin.pri \
+		/usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_uitools.pri \
 		/usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_widgets.pri \
 		/usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_widgets_private.pri \
 		/usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_xcb_qpa_lib_private.pri \
@@ -211,6 +193,7 @@ Makefile: Project.pro /usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++/qmake.conf
 /usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_core_private.pri:
 /usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_dbus.pri:
 /usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_dbus_private.pri:
+/usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_designer.pri:
 /usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_devicediscovery_support_private.pri:
 /usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_eglfs_kms_gbm_support_private.pri:
 /usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_eglfs_kms_support_private.pri:
@@ -218,14 +201,10 @@ Makefile: Project.pro /usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++/qmake.conf
 /usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_fb_support_private.pri:
 /usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_gui.pri:
 /usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_gui_private.pri:
+/usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_help.pri:
 /usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_input_support_private.pri:
 /usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_kms_support_private.pri:
-/usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_labsanimation.pri:
-/usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_labsfolderlistmodel.pri:
-/usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_labsqmlmodels.pri:
-/usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_labssettings.pri:
-/usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_labssharedimage.pri:
-/usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_labswavefrontmesh.pri:
+/usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_linguist.pri:
 /usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_network.pri:
 /usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_network_private.pri:
 /usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_opengl.pri:
@@ -234,27 +213,12 @@ Makefile: Project.pro /usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++/qmake.conf
 /usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_openglwidgets_private.pri:
 /usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_printsupport.pri:
 /usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_printsupport_private.pri:
-/usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_qml.pri:
-/usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_qmlcore.pri:
-/usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_qmlintegration.pri:
-/usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_qmllocalstorage.pri:
-/usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_qmlmodels.pri:
-/usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_qmltest.pri:
-/usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_qmlworkerscript.pri:
-/usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_qmlxmllistmodel.pri:
-/usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_quick.pri:
-/usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_quickcontrols2.pri:
-/usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_quickcontrols2impl.pri:
-/usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_quickdialogs2.pri:
-/usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_quickdialogs2quickimpl.pri:
-/usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_quickdialogs2utils.pri:
-/usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_quicklayouts.pri:
-/usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_quicktemplates2.pri:
-/usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_quickwidgets.pri:
 /usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_sql.pri:
 /usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_sql_private.pri:
 /usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_testlib.pri:
 /usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_testlib_private.pri:
+/usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_uiplugin.pri:
+/usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_uitools.pri:
 /usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_widgets.pri:
 /usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_widgets_private.pri:
 /usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_xcb_qpa_lib_private.pri:
@@ -294,24 +258,24 @@ uninstall_subtargets: sub-Server-uninstall_subtargets sub-Client-uninstall_subta
 
 sub-Server-check:
 	@test -d Server/ || mkdir -p Server/
-	cd Server/ && ( test -e Makefile || $(QMAKE) -o Makefile /mnt/e/WorkSpace/QT/BringUpProject/Server/Server.pro ) && $(MAKE) -f Makefile check
+	cd Server/ && ( test -e Makefile || $(QMAKE) -o Makefile /mnt/c/Users/Mostafa.elfallal/Documents/workspace/CTBringUPProject/Server/Server.pro ) && $(MAKE) -f Makefile check
 sub-Client-check:
 	@test -d Client/ || mkdir -p Client/
-	cd Client/ && ( test -e Makefile || $(QMAKE) -o Makefile /mnt/e/WorkSpace/QT/BringUpProject/Client/Client.pro ) && $(MAKE) -f Makefile check
+	cd Client/ && ( test -e Makefile || $(QMAKE) -o Makefile /mnt/c/Users/Mostafa.elfallal/Documents/workspace/CTBringUPProject/Client/Client.pro ) && $(MAKE) -f Makefile check
 sub-Tests-check:
 	@test -d Tests/ || mkdir -p Tests/
-	cd Tests/ && ( test -e Makefile || $(QMAKE) -o Makefile /mnt/e/WorkSpace/QT/BringUpProject/Tests/Tests.pro ) && $(MAKE) -f Makefile check
+	cd Tests/ && ( test -e Makefile || $(QMAKE) -o Makefile /mnt/c/Users/Mostafa.elfallal/Documents/workspace/CTBringUPProject/Tests/Tests.pro ) && $(MAKE) -f Makefile check
 check: sub-Server-check sub-Client-check sub-Tests-check
 
 sub-Server-benchmark:
 	@test -d Server/ || mkdir -p Server/
-	cd Server/ && ( test -e Makefile || $(QMAKE) -o Makefile /mnt/e/WorkSpace/QT/BringUpProject/Server/Server.pro ) && $(MAKE) -f Makefile benchmark
+	cd Server/ && ( test -e Makefile || $(QMAKE) -o Makefile /mnt/c/Users/Mostafa.elfallal/Documents/workspace/CTBringUPProject/Server/Server.pro ) && $(MAKE) -f Makefile benchmark
 sub-Client-benchmark:
 	@test -d Client/ || mkdir -p Client/
-	cd Client/ && ( test -e Makefile || $(QMAKE) -o Makefile /mnt/e/WorkSpace/QT/BringUpProject/Client/Client.pro ) && $(MAKE) -f Makefile benchmark
+	cd Client/ && ( test -e Makefile || $(QMAKE) -o Makefile /mnt/c/Users/Mostafa.elfallal/Documents/workspace/CTBringUPProject/Client/Client.pro ) && $(MAKE) -f Makefile benchmark
 sub-Tests-benchmark:
 	@test -d Tests/ || mkdir -p Tests/
-	cd Tests/ && ( test -e Makefile || $(QMAKE) -o Makefile /mnt/e/WorkSpace/QT/BringUpProject/Tests/Tests.pro ) && $(MAKE) -f Makefile benchmark
+	cd Tests/ && ( test -e Makefile || $(QMAKE) -o Makefile /mnt/c/Users/Mostafa.elfallal/Documents/workspace/CTBringUPProject/Tests/Tests.pro ) && $(MAKE) -f Makefile benchmark
 benchmark: sub-Server-benchmark sub-Client-benchmark sub-Tests-benchmark
 install:install_subtargets  FORCE
 
@@ -326,17 +290,17 @@ dist: distdir FORCE
 
 distdir: sub-Server-distdir sub-Client-distdir sub-Tests-distdir FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
-	$(COPY_FILE) --parents /usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/spec_pre.prf /usr/lib/x86_64-linux-gnu/qt6/mkspecs/common/unix.conf /usr/lib/x86_64-linux-gnu/qt6/mkspecs/common/linux.conf /usr/lib/x86_64-linux-gnu/qt6/mkspecs/common/sanitize.conf /usr/lib/x86_64-linux-gnu/qt6/mkspecs/common/gcc-base.conf /usr/lib/x86_64-linux-gnu/qt6/mkspecs/common/gcc-base-unix.conf /usr/lib/x86_64-linux-gnu/qt6/mkspecs/common/g++-base.conf /usr/lib/x86_64-linux-gnu/qt6/mkspecs/common/g++-unix.conf /usr/lib/x86_64-linux-gnu/qt6/mkspecs/qconfig.pri /usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_concurrent.pri /usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_concurrent_private.pri /usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_core.pri /usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_core_private.pri /usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_dbus.pri /usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_dbus_private.pri /usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_devicediscovery_support_private.pri /usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_eglfs_kms_gbm_support_private.pri /usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_eglfs_kms_support_private.pri /usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_eglfsdeviceintegration_private.pri /usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_fb_support_private.pri /usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_gui.pri /usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_gui_private.pri /usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_input_support_private.pri /usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_kms_support_private.pri /usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_labsanimation.pri /usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_labsfolderlistmodel.pri /usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_labsqmlmodels.pri /usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_labssettings.pri /usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_labssharedimage.pri /usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_labswavefrontmesh.pri /usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_network.pri /usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_network_private.pri /usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_opengl.pri /usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_opengl_private.pri /usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_openglwidgets.pri /usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_openglwidgets_private.pri /usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_printsupport.pri /usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_printsupport_private.pri /usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_qml.pri /usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_qmlcore.pri /usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_qmlintegration.pri /usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_qmllocalstorage.pri /usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_qmlmodels.pri /usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_qmltest.pri /usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_qmlworkerscript.pri /usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_qmlxmllistmodel.pri /usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_quick.pri /usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_quickcontrols2.pri /usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_quickcontrols2impl.pri /usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_quickdialogs2.pri /usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_quickdialogs2quickimpl.pri /usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_quickdialogs2utils.pri /usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_quicklayouts.pri /usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_quicktemplates2.pri /usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_quickwidgets.pri /usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_sql.pri /usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_sql_private.pri /usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_testlib.pri /usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_testlib_private.pri /usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_widgets.pri /usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_widgets_private.pri /usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_xcb_qpa_lib_private.pri /usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_xml.pri /usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_xml_private.pri /usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/qt_functions.prf /usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/qt_config.prf /usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++/qmake.conf /usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/spec_post.prf .qmake.stash /usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/exclusive_builds.prf /usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/toolchain.prf /usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/default_pre.prf /usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/resolve_config.prf /usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/default_post.prf /usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/warn_on.prf /usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/qmake_use.prf /usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/file_copies.prf /usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/testcase_targets.prf /usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/exceptions.prf /usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/yacc.prf /usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/lex.prf Project.pro $(DISTDIR)/
+	$(COPY_FILE) --parents /usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/spec_pre.prf /usr/lib/x86_64-linux-gnu/qt6/mkspecs/common/unix.conf /usr/lib/x86_64-linux-gnu/qt6/mkspecs/common/linux.conf /usr/lib/x86_64-linux-gnu/qt6/mkspecs/common/sanitize.conf /usr/lib/x86_64-linux-gnu/qt6/mkspecs/common/gcc-base.conf /usr/lib/x86_64-linux-gnu/qt6/mkspecs/common/gcc-base-unix.conf /usr/lib/x86_64-linux-gnu/qt6/mkspecs/common/g++-base.conf /usr/lib/x86_64-linux-gnu/qt6/mkspecs/common/g++-unix.conf /usr/lib/x86_64-linux-gnu/qt6/mkspecs/qconfig.pri /usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_concurrent.pri /usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_concurrent_private.pri /usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_core.pri /usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_core_private.pri /usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_dbus.pri /usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_dbus_private.pri /usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_designer.pri /usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_devicediscovery_support_private.pri /usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_eglfs_kms_gbm_support_private.pri /usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_eglfs_kms_support_private.pri /usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_eglfsdeviceintegration_private.pri /usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_fb_support_private.pri /usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_gui.pri /usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_gui_private.pri /usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_help.pri /usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_input_support_private.pri /usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_kms_support_private.pri /usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_linguist.pri /usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_network.pri /usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_network_private.pri /usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_opengl.pri /usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_opengl_private.pri /usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_openglwidgets.pri /usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_openglwidgets_private.pri /usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_printsupport.pri /usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_printsupport_private.pri /usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_sql.pri /usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_sql_private.pri /usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_testlib.pri /usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_testlib_private.pri /usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_uiplugin.pri /usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_uitools.pri /usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_widgets.pri /usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_widgets_private.pri /usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_xcb_qpa_lib_private.pri /usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_xml.pri /usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_xml_private.pri /usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/qt_functions.prf /usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/qt_config.prf /usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++/qmake.conf /usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/spec_post.prf .qmake.stash /usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/exclusive_builds.prf /usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/toolchain.prf /usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/default_pre.prf /usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/resolve_config.prf /usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/default_post.prf /usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/warn_on.prf /usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/qmake_use.prf /usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/file_copies.prf /usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/testcase_targets.prf /usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/exceptions.prf /usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/yacc.prf /usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/lex.prf Project.pro $(DISTDIR)/
 
 sub-Server-distdir: FORCE
 	@test -d Server/ || mkdir -p Server/
-	cd Server/ && ( test -e Makefile || $(QMAKE) -o Makefile /mnt/e/WorkSpace/QT/BringUpProject/Server/Server.pro ) && $(MAKE) -e -f Makefile distdir DISTDIR=$(DISTDIR)/Server
+	cd Server/ && ( test -e Makefile || $(QMAKE) -o Makefile /mnt/c/Users/Mostafa.elfallal/Documents/workspace/CTBringUPProject/Server/Server.pro ) && $(MAKE) -e -f Makefile distdir DISTDIR=$(DISTDIR)/Server
 
 sub-Client-distdir: FORCE
 	@test -d Client/ || mkdir -p Client/
-	cd Client/ && ( test -e Makefile || $(QMAKE) -o Makefile /mnt/e/WorkSpace/QT/BringUpProject/Client/Client.pro ) && $(MAKE) -e -f Makefile distdir DISTDIR=$(DISTDIR)/Client
+	cd Client/ && ( test -e Makefile || $(QMAKE) -o Makefile /mnt/c/Users/Mostafa.elfallal/Documents/workspace/CTBringUPProject/Client/Client.pro ) && $(MAKE) -e -f Makefile distdir DISTDIR=$(DISTDIR)/Client
 
 sub-Tests-distdir: FORCE
 	@test -d Tests/ || mkdir -p Tests/
-	cd Tests/ && ( test -e Makefile || $(QMAKE) -o Makefile /mnt/e/WorkSpace/QT/BringUpProject/Tests/Tests.pro ) && $(MAKE) -e -f Makefile distdir DISTDIR=$(DISTDIR)/Tests
+	cd Tests/ && ( test -e Makefile || $(QMAKE) -o Makefile /mnt/c/Users/Mostafa.elfallal/Documents/workspace/CTBringUPProject/Tests/Tests.pro ) && $(MAKE) -e -f Makefile distdir DISTDIR=$(DISTDIR)/Tests
 
