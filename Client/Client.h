@@ -3,30 +3,34 @@
 
 #include <QObject>
 #include <QTcpSocket>
+#include <QSocketNotifier>
+#include <unistd.h>
 #include "MessageBuffer.h"
 
 class Client : public QObject
 {
     Q_OBJECT
-    public:
-    explicit Client(QObject* parent = nullptr);
+public:
+    explicit Client(QObject *parent = nullptr);
     void connectToServer();
 
-    public slots:
-    void sendData(const QString& text);
+public slots:
+    void sendData(const QString &text);
 
-    private slots:
+private slots:
     void onConnected();
-    void onReadyRead();
+    void onServerResponse();
     void onDisconnected();
+    void onUserInput();
 
-    signals:
+signals:
     void disconnected();
 
-    private:
-    QTcpSocket* socket;
+private:
+    QTcpSocket *socket;
 
     MessageBuffer m_queue;
+    QSocketNotifier *notifier;
 };
 
 #endif // CLIENT_H
