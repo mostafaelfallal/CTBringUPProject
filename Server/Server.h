@@ -9,17 +9,16 @@
 class Server : public QObject
 {
     Q_OBJECT
-    public:
-    explicit Server(QObject* parent = nullptr);
+public:
+    explicit Server(QObject *parent = nullptr);
 
-    private slots:
+private slots:
     void onNewConnection();
-    void onClientMessage(const QString& message, ClientContext* sender);
-    void onClientDisconnected(ClientContext* client);
+    void onClientDisconnected(ClientContext *client);
 
-    private:
-    QTcpServer* server;
-    QList<ClientContext*> m_clients;
+private:
+    QTcpServer *server;
+    QList<ClientContext *> m_clients;
 };
 
 #endif // SERVER_H

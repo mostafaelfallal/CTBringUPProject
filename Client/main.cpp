@@ -1,7 +1,6 @@
 #include <QCoreApplication>
 #include <QThread>
 #include "Client.h"
-#include "InputWorker.h"
 
 int main(int argc, char *argv[])
 {

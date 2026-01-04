@@ -52,25 +52,8 @@ OBJECTS_DIR   = ../build/Tests/obj/
 
 ####### Files
 
-SOURCES       = main.cpp \
-		Parser_Test.cpp \
-		Command_Test.cpp \
-		../Server/Parser.cpp \
-		../Server/Command.cpp \
-		../Server/ClientContext.cpp \
-		../Server/Factory.cpp \
-		../Server/Server.cpp ../build/Tests/moc/moc_ClientContext.cpp \
-		../build/Tests/moc/moc_Server.cpp
-OBJECTS       = ../build/Tests/obj/main.o \
-		../build/Tests/obj/Parser_Test.o \
-		../build/Tests/obj/Command_Test.o \
-		../build/Tests/obj/Parser.o \
-		../build/Tests/obj/Command.o \
-		../build/Tests/obj/ClientContext.o \
-		../build/Tests/obj/Factory.o \
-		../build/Tests/obj/Server.o \
-		../build/Tests/obj/moc_ClientContext.o \
-		../build/Tests/obj/moc_Server.o
+SOURCES       = main.cpp 
+OBJECTS       = ../build/Tests/obj/main.o
 DIST          = /usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt6/mkspecs/common/unix.conf \
 		/usr/lib/x86_64-linux-gnu/qt6/mkspecs/common/linux.conf \
@@ -140,19 +123,7 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/exceptions.prf \
 		/usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/yacc.prf \
 		/usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/lex.prf \
-		Tests.pro ../Server/Parser.h \
-		../Server/Command.h \
-		../Server/ClientContext.h \
-		../Server/Factory.h \
-		../Server/Server.h \
-		../Server/ICommand.h main.cpp \
-		Parser_Test.cpp \
-		Command_Test.cpp \
-		../Server/Parser.cpp \
-		../Server/Command.cpp \
-		../Server/ClientContext.cpp \
-		../Server/Factory.cpp \
-		../Server/Server.cpp
+		Tests.pro  main.cpp
 QMAKE_TARGET  = Tests
 DESTDIR       = ../build/bin/
 TARGET        = ../build/bin/Tests
@@ -325,8 +296,7 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents /usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../Server/Parser.h ../Server/Command.h ../Server/ClientContext.h ../Server/Factory.h ../Server/Server.h ../Server/ICommand.h $(DISTDIR)/
-	$(COPY_FILE) --parents main.cpp Parser_Test.cpp Command_Test.cpp ../Server/Parser.cpp ../Server/Command.cpp ../Server/ClientContext.cpp ../Server/Factory.cpp ../Server/Server.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents main.cpp $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -357,20 +327,8 @@ compiler_moc_predefs_clean:
 ../build/Tests/moc/moc_predefs.h: /usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/data/dummy.cpp
 	g++ -pipe -O2 -std=gnu++1z -Wall -Wextra -fPIC -dM -E -o ../build/Tests/moc/moc_predefs.h /usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/data/dummy.cpp
 
-compiler_moc_header_make_all: ../build/Tests/moc/moc_ClientContext.cpp ../build/Tests/moc/moc_Server.cpp
+compiler_moc_header_make_all:
 compiler_moc_header_clean:
-	-$(DEL_FILE) ../build/Tests/moc/moc_ClientContext.cpp ../build/Tests/moc/moc_Server.cpp
-../build/Tests/moc/moc_ClientContext.cpp: ../Server/ClientContext.h \
-		../build/Tests/moc/moc_predefs.h \
-		/usr/lib/qt6/libexec/moc
-	/usr/lib/qt6/libexec/moc $(DEFINES) --include /mnt/c/Users/Mostafa.elfallal/Documents/workspace/CTBringUPProject/build/Tests/moc/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -I/mnt/c/Users/Mostafa.elfallal/Documents/workspace/CTBringUPProject/Tests -I/mnt/c/Users/Mostafa.elfallal/Documents/workspace/CTBringUPProject/Server -I/mnt/c/Users/Mostafa.elfallal/Documents/workspace/CTBringUPProject/Client -I/mnt/c/Users/Mostafa.elfallal/Documents/workspace/CTBringUPProject -I/usr/include/x86_64-linux-gnu/qt6 -I/usr/include/x86_64-linux-gnu/qt6/QtNetwork -I/usr/include/x86_64-linux-gnu/qt6/QtCore -I/usr/include/c++/13 -I/usr/include/x86_64-linux-gnu/c++/13 -I/usr/include/c++/13/backward -I/usr/lib/gcc/x86_64-linux-gnu/13/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../Server/ClientContext.h -o ../build/Tests/moc/moc_ClientContext.cpp
-
-../build/Tests/moc/moc_Server.cpp: ../Server/Server.h \
-		../Server/ClientContext.h \
-		../build/Tests/moc/moc_predefs.h \
-		/usr/lib/qt6/libexec/moc
-	/usr/lib/qt6/libexec/moc $(DEFINES) --include /mnt/c/Users/Mostafa.elfallal/Documents/workspace/CTBringUPProject/build/Tests/moc/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -I/mnt/c/Users/Mostafa.elfallal/Documents/workspace/CTBringUPProject/Tests -I/mnt/c/Users/Mostafa.elfallal/Documents/workspace/CTBringUPProject/Server -I/mnt/c/Users/Mostafa.elfallal/Documents/workspace/CTBringUPProject/Client -I/mnt/c/Users/Mostafa.elfallal/Documents/workspace/CTBringUPProject -I/usr/include/x86_64-linux-gnu/qt6 -I/usr/include/x86_64-linux-gnu/qt6/QtNetwork -I/usr/include/x86_64-linux-gnu/qt6/QtCore -I/usr/include/c++/13 -I/usr/include/x86_64-linux-gnu/c++/13 -I/usr/include/c++/13/backward -I/usr/lib/gcc/x86_64-linux-gnu/13/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../Server/Server.h -o ../build/Tests/moc/moc_Server.cpp
-
 compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
 compiler_moc_source_make_all:
@@ -381,55 +339,12 @@ compiler_yacc_impl_make_all:
 compiler_yacc_impl_clean:
 compiler_lex_make_all:
 compiler_lex_clean:
-compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean 
+compiler_clean: compiler_moc_predefs_clean 
 
 ####### Compile
 
 ../build/Tests/obj/main.o: main.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../build/Tests/obj/main.o main.cpp
-
-../build/Tests/obj/Parser_Test.o: Parser_Test.cpp ../Server/Parser.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../build/Tests/obj/Parser_Test.o Parser_Test.cpp
-
-../build/Tests/obj/Command_Test.o: Command_Test.cpp ../Server/Command.h \
-		../Server/ICommand.h \
-		../Server/ClientContext.h \
-		../Server/Factory.h \
-		../Common.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../build/Tests/obj/Command_Test.o Command_Test.cpp
-
-../build/Tests/obj/Parser.o: ../Server/Parser.cpp ../Server/Parser.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../build/Tests/obj/Parser.o ../Server/Parser.cpp
-
-../build/Tests/obj/Command.o: ../Server/Command.cpp ../Server/Command.h \
-		../Server/ICommand.h \
-		../Server/ClientContext.h \
-		../Common.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../build/Tests/obj/Command.o ../Server/Command.cpp
-
-../build/Tests/obj/ClientContext.o: ../Server/ClientContext.cpp ../Server/ClientContext.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../build/Tests/obj/ClientContext.o ../Server/ClientContext.cpp
-
-../build/Tests/obj/Factory.o: ../Server/Factory.cpp ../Server/Factory.h \
-		../Server/Command.h \
-		../Server/ICommand.h \
-		../Server/ClientContext.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../build/Tests/obj/Factory.o ../Server/Factory.cpp
-
-../build/Tests/obj/Server.o: ../Server/Server.cpp ../Server/Server.h \
-		../Server/ClientContext.h \
-		../Common.h \
-		../Server/Parser.h \
-		../Server/Factory.h \
-		../Server/Command.h \
-		../Server/ICommand.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../build/Tests/obj/Server.o ../Server/Server.cpp
-
-../build/Tests/obj/moc_ClientContext.o: ../build/Tests/moc/moc_ClientContext.cpp 
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../build/Tests/obj/moc_ClientContext.o ../build/Tests/moc/moc_ClientContext.cpp
-
-../build/Tests/obj/moc_Server.o: ../build/Tests/moc/moc_Server.cpp 
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../build/Tests/obj/moc_Server.o ../build/Tests/moc/moc_Server.cpp
 
 ####### Install
 

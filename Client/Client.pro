@@ -6,4 +6,4 @@ TARGET = Client
 TEMPLATE = app
 include(../defaults.pri)
 SOURCES += main.cpp Client.cpp MessageBuffer.cpp
-HEADERS += Client.h InputWorker.h MessageBuffer.h
+HEADERS += Client.h  MessageBuffer.h

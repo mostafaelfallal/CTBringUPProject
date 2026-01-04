@@ -1,78 +1,76 @@
 #pragma once
 #include "ICommand.h"
+#include "CommandContext.h"
+#include "ClientContext.h"
+#include "Result.h"
+#include "Response.h"
 
-class AuthCommand : public BaseCommand {
-    public:
-    using BaseCommand::BaseCommand; // Use parent constructor
-    protected:
-    CommandResult perform(const QStringList& args) override;
-    bool requiresAuth() const override { return false; } // Auth cmd doesn't need auth
-    int minArgs() const override { return 2; }
-    QString argErrorMsg() const override { return "Insufficient arguments for AUTH command."; }
+class AuthCommand : public BaseCommand
+{
+public:
+    using BaseCommand::BaseCommand;
+    Result validate(CommandContext &commandCtx, ClientContext *) override;
+    Result execute(CommandContext &commandCtx, ClientContext *) override;
 };
 
-class CreateCommand : public BaseCommand {
-    public:
+class CreateCommand : public BaseCommand
+{
+public:
     using BaseCommand::BaseCommand;
-    protected:
-    CommandResult perform(const QStringList& args) override;
-    int minArgs() const override { return 1; }
-    QString argErrorMsg() const override { return "Insufficient arguments for CREATE command."; }
+    Result validate(CommandContext &commandCtx, ClientContext *) override;
+    Result execute(CommandContext &commandCtx, ClientContext *) override;
 };
 
-class WriteCommand : public BaseCommand {
-    public:
+class WriteCommand : public BaseCommand
+{
+public:
     using BaseCommand::BaseCommand;
-    protected:
-    CommandResult perform(const QStringList& args) override;
-    int minArgs() const override { return 2; }
-    QString argErrorMsg() const override { return "Insufficient arguments for WRITE command."; }
+    Result validate(CommandContext &commandCtx, ClientContext *clientCtx) override;
+    Result execute(CommandContext &commandCtx, ClientContext *clientCtx) override;
 };
 
-class ReadCommand : public BaseCommand {
-    public:
+class ReadCommand : public BaseCommand
+{
+public:
     using BaseCommand::BaseCommand;
-    protected:
-    CommandResult perform(const QStringList& args) override;
-    int minArgs() const override { return 1; }
+    Result validate(CommandContext &commandCtx, ClientContext *clientCtx) override;
+    Result execute(CommandContext &commandCtx, ClientContext *clientCtx) override;
 };
 
-class AppendCommand : public BaseCommand {
-    public:
+class AppendCommand : public BaseCommand
+{
+public:
     using BaseCommand::BaseCommand;
-    protected:
-    CommandResult perform(const QStringList& args) override;
-    int minArgs() const override { return 2; }
+    Result validate(CommandContext &commandCtx, ClientContext *clientCtx) override;
+    Result execute(CommandContext &commandCtx, ClientContext *clientCtx) override;
 };
 
-class DeleteCommand : public BaseCommand {
-    public:
+class DeleteCommand : public BaseCommand
+{
+public:
     using BaseCommand::BaseCommand;
-    protected:
-    CommandResult perform(const QStringList& args) override;
-    int minArgs() const override { return 1; }
+    Result validate(CommandContext &commandCtx, ClientContext *clientCtx) override;
+    Result execute(CommandContext &commandCtx, ClientContext *clientCtx) override;
+};
+class ListCommand : public BaseCommand
+{
+public:
+    using BaseCommand::BaseCommand;
+    Result validate(CommandContext &commandCtx, ClientContext *clientCtx) override;
+    Result execute(CommandContext &commandCtx, ClientContext *clientCtx) override;
+};
+class RenameCommand : public BaseCommand
+{
+public:
+    using BaseCommand::BaseCommand;
+    Result validate(CommandContext &commandCtx, ClientContext *clientCtx) override;
+    Result execute(CommandContext &commandCtx, ClientContext *clientCtx) override;
 };
 
-class ListCommand : public BaseCommand {
-    public:
+class InfoCommand : public BaseCommand
+{
+public:
     using BaseCommand::BaseCommand;
-    protected:
-    CommandResult perform(const QStringList& args) override;
-    int minArgs() const override { return 0; }
-};
-
-class RenameCommand : public BaseCommand {
-    public:
-    using BaseCommand::BaseCommand;
-    protected:
-    CommandResult perform(const QStringList& args) override;
-    int minArgs() const override { return 2; }
-};
-
-class InfoCommand : public BaseCommand {
-    public:
-    using BaseCommand::BaseCommand;
-    protected:
-    CommandResult perform(const QStringList& args) override;
-    int minArgs() const override { return 1; }
+    Result validate(CommandContext &commandCtx, ClientContext *clientCtx) override;
+    Result execute(CommandContext &commandCtx, ClientContext *clientCtx) override;
 };

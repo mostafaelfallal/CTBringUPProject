@@ -53,18 +53,16 @@ OBJECTS_DIR   = ../build/Server/obj/
 ####### Files
 
 SOURCES       = main.cpp \
-		Server.cpp \
+		Builder.cpp \
 		ClientContext.cpp \
-		Parser.cpp \
 		Command.cpp \
-		Factory.cpp ../build/Server/moc/moc_Server.cpp \
+		Server.cpp ../build/Server/moc/moc_Server.cpp \
 		../build/Server/moc/moc_ClientContext.cpp
 OBJECTS       = ../build/Server/obj/main.o \
-		../build/Server/obj/Server.o \
+		../build/Server/obj/Builder.o \
 		../build/Server/obj/ClientContext.o \
-		../build/Server/obj/Parser.o \
 		../build/Server/obj/Command.o \
-		../build/Server/obj/Factory.o \
+		../build/Server/obj/Server.o \
 		../build/Server/obj/moc_Server.o \
 		../build/Server/obj/moc_ClientContext.o
 DIST          = /usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/spec_pre.prf \
@@ -136,17 +134,23 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/exceptions.prf \
 		/usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/yacc.prf \
 		/usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/lex.prf \
-		Server.pro Server.h \
+		Server.pro Builder.h \
+		Server.h \
 		ClientContext.h \
-		Parser.h \
 		Command.h \
-		Factory.h \
-		ICommand.h main.cpp \
-		Server.cpp \
+		converter.h \
+		ICommand.h \
+		Extractor.h \
+		Handler.h \
+		Reader.h \
+		Response.h \
+		Result.h \
+		Validator.h \
+		Writer.h main.cpp \
+		Builder.cpp \
 		ClientContext.cpp \
-		Parser.cpp \
 		Command.cpp \
-		Factory.cpp
+		Server.cpp
 QMAKE_TARGET  = Server
 DESTDIR       = ../build/bin/
 TARGET        = ../build/bin/Server
@@ -319,8 +323,8 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents /usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents Server.h ClientContext.h Parser.h Command.h Factory.h ICommand.h $(DISTDIR)/
-	$(COPY_FILE) --parents main.cpp Server.cpp ClientContext.cpp Parser.cpp Command.cpp Factory.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents Builder.h Server.h ClientContext.h Command.h converter.h ICommand.h Extractor.h Handler.h Reader.h Response.h Result.h Validator.h Writer.h $(DISTDIR)/
+	$(COPY_FILE) --parents main.cpp Builder.cpp ClientContext.cpp Command.cpp Server.cpp $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -356,11 +360,20 @@ compiler_moc_header_clean:
 	-$(DEL_FILE) ../build/Server/moc/moc_Server.cpp ../build/Server/moc/moc_ClientContext.cpp
 ../build/Server/moc/moc_Server.cpp: Server.h \
 		ClientContext.h \
+		Handler.h \
+		CommandContext.h \
+		Response.h \
+		Result.h \
 		../build/Server/moc/moc_predefs.h \
 		/usr/lib/qt6/libexec/moc
 	/usr/lib/qt6/libexec/moc $(DEFINES) --include /mnt/c/Users/Mostafa.elfallal/Documents/workspace/CTBringUPProject/build/Server/moc/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -I/mnt/c/Users/Mostafa.elfallal/Documents/workspace/CTBringUPProject/Server -I/usr/include/x86_64-linux-gnu/qt6 -I/usr/include/x86_64-linux-gnu/qt6/QtNetwork -I/usr/include/x86_64-linux-gnu/qt6/QtCore -I/usr/include/c++/13 -I/usr/include/x86_64-linux-gnu/c++/13 -I/usr/include/c++/13/backward -I/usr/lib/gcc/x86_64-linux-gnu/13/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include Server.h -o ../build/Server/moc/moc_Server.cpp
 
 ../build/Server/moc/moc_ClientContext.cpp: ClientContext.h \
+		Handler.h \
+		CommandContext.h \
+		Response.h \
+		Result.h \
+		ClientContext.h \
 		../build/Server/moc/moc_predefs.h \
 		/usr/lib/qt6/libexec/moc
 	/usr/lib/qt6/libexec/moc $(DEFINES) --include /mnt/c/Users/Mostafa.elfallal/Documents/workspace/CTBringUPProject/build/Server/moc/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -I/mnt/c/Users/Mostafa.elfallal/Documents/workspace/CTBringUPProject/Server -I/usr/include/x86_64-linux-gnu/qt6 -I/usr/include/x86_64-linux-gnu/qt6/QtNetwork -I/usr/include/x86_64-linux-gnu/qt6/QtCore -I/usr/include/c++/13 -I/usr/include/x86_64-linux-gnu/c++/13 -I/usr/include/c++/13/backward -I/usr/lib/gcc/x86_64-linux-gnu/13/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ClientContext.h -o ../build/Server/moc/moc_ClientContext.cpp
@@ -380,35 +393,56 @@ compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean
 ####### Compile
 
 ../build/Server/obj/main.o: main.cpp Server.h \
-		ClientContext.h
+		ClientContext.h \
+		Handler.h \
+		CommandContext.h \
+		Response.h \
+		Result.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../build/Server/obj/main.o main.cpp
 
-../build/Server/obj/Server.o: Server.cpp Server.h \
+../build/Server/obj/Builder.o: Builder.cpp Builder.h \
+		Handler.h \
+		CommandContext.h \
+		Response.h \
+		Result.h \
 		ClientContext.h \
-		../Common.h \
-		Parser.h \
-		Factory.h \
 		Command.h \
 		ICommand.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../build/Server/obj/Server.o Server.cpp
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../build/Server/obj/Builder.o Builder.cpp
 
-../build/Server/obj/ClientContext.o: ClientContext.cpp ClientContext.h
+../build/Server/obj/ClientContext.o: ClientContext.cpp ClientContext.h \
+		Handler.h \
+		CommandContext.h \
+		Response.h \
+		Result.h \
+		Reader.h \
+		converter.h \
+		Extractor.h \
+		Validator.h \
+		Builder.h \
+		Command.h \
+		ICommand.h \
+		Writer.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../build/Server/obj/ClientContext.o ClientContext.cpp
-
-../build/Server/obj/Parser.o: Parser.cpp Parser.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../build/Server/obj/Parser.o Parser.cpp
 
 ../build/Server/obj/Command.o: Command.cpp Command.h \
 		ICommand.h \
 		ClientContext.h \
+		Handler.h \
+		CommandContext.h \
+		Response.h \
+		Result.h \
 		../Common.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../build/Server/obj/Command.o Command.cpp
 
-../build/Server/obj/Factory.o: Factory.cpp Factory.h \
-		Command.h \
-		ICommand.h \
-		ClientContext.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../build/Server/obj/Factory.o Factory.cpp
+../build/Server/obj/Server.o: Server.cpp Server.h \
+		ClientContext.h \
+		Handler.h \
+		CommandContext.h \
+		Response.h \
+		Result.h \
+		../Common.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../build/Server/obj/Server.o Server.cpp
 
 ../build/Server/obj/moc_Server.o: ../build/Server/moc/moc_Server.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../build/Server/obj/moc_Server.o ../build/Server/moc/moc_Server.cpp

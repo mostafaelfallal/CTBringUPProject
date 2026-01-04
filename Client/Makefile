@@ -54,13 +54,11 @@ OBJECTS_DIR   = ../build/Client/obj/
 
 SOURCES       = main.cpp \
 		Client.cpp \
-		MessageBuffer.cpp ../build/Client/moc/moc_Client.cpp \
-		../build/Client/moc/moc_InputWorker.cpp
+		MessageBuffer.cpp ../build/Client/moc/moc_Client.cpp
 OBJECTS       = ../build/Client/obj/main.o \
 		../build/Client/obj/Client.o \
 		../build/Client/obj/MessageBuffer.o \
-		../build/Client/obj/moc_Client.o \
-		../build/Client/obj/moc_InputWorker.o
+		../build/Client/obj/moc_Client.o
 DIST          = /usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt6/mkspecs/common/unix.conf \
 		/usr/lib/x86_64-linux-gnu/qt6/mkspecs/common/linux.conf \
@@ -131,7 +129,6 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/yacc.prf \
 		/usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/lex.prf \
 		Client.pro Client.h \
-		InputWorker.h \
 		MessageBuffer.h main.cpp \
 		Client.cpp \
 		MessageBuffer.cpp
@@ -307,7 +304,7 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents /usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents Client.h InputWorker.h MessageBuffer.h $(DISTDIR)/
+	$(COPY_FILE) --parents Client.h MessageBuffer.h $(DISTDIR)/
 	$(COPY_FILE) --parents main.cpp Client.cpp MessageBuffer.cpp $(DISTDIR)/
 
 
@@ -339,19 +336,14 @@ compiler_moc_predefs_clean:
 ../build/Client/moc/moc_predefs.h: /usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/data/dummy.cpp
 	g++ -pipe -O2 -std=gnu++1z -Wall -Wextra -fPIC -dM -E -o ../build/Client/moc/moc_predefs.h /usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/data/dummy.cpp
 
-compiler_moc_header_make_all: ../build/Client/moc/moc_Client.cpp ../build/Client/moc/moc_InputWorker.cpp
+compiler_moc_header_make_all: ../build/Client/moc/moc_Client.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) ../build/Client/moc/moc_Client.cpp ../build/Client/moc/moc_InputWorker.cpp
+	-$(DEL_FILE) ../build/Client/moc/moc_Client.cpp
 ../build/Client/moc/moc_Client.cpp: Client.h \
 		MessageBuffer.h \
 		../build/Client/moc/moc_predefs.h \
 		/usr/lib/qt6/libexec/moc
 	/usr/lib/qt6/libexec/moc $(DEFINES) --include /mnt/c/Users/Mostafa.elfallal/Documents/workspace/CTBringUPProject/build/Client/moc/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -I/mnt/c/Users/Mostafa.elfallal/Documents/workspace/CTBringUPProject/Client -I/usr/include/x86_64-linux-gnu/qt6 -I/usr/include/x86_64-linux-gnu/qt6/QtNetwork -I/usr/include/x86_64-linux-gnu/qt6/QtCore -I/usr/include/c++/13 -I/usr/include/x86_64-linux-gnu/c++/13 -I/usr/include/c++/13/backward -I/usr/lib/gcc/x86_64-linux-gnu/13/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include Client.h -o ../build/Client/moc/moc_Client.cpp
-
-../build/Client/moc/moc_InputWorker.cpp: InputWorker.h \
-		../build/Client/moc/moc_predefs.h \
-		/usr/lib/qt6/libexec/moc
-	/usr/lib/qt6/libexec/moc $(DEFINES) --include /mnt/c/Users/Mostafa.elfallal/Documents/workspace/CTBringUPProject/build/Client/moc/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -I/mnt/c/Users/Mostafa.elfallal/Documents/workspace/CTBringUPProject/Client -I/usr/include/x86_64-linux-gnu/qt6 -I/usr/include/x86_64-linux-gnu/qt6/QtNetwork -I/usr/include/x86_64-linux-gnu/qt6/QtCore -I/usr/include/c++/13 -I/usr/include/x86_64-linux-gnu/c++/13 -I/usr/include/c++/13/backward -I/usr/lib/gcc/x86_64-linux-gnu/13/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include InputWorker.h -o ../build/Client/moc/moc_InputWorker.cpp
 
 compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
@@ -368,8 +360,7 @@ compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean
 ####### Compile
 
 ../build/Client/obj/main.o: main.cpp Client.h \
-		MessageBuffer.h \
-		InputWorker.h
+		MessageBuffer.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../build/Client/obj/main.o main.cpp
 
 ../build/Client/obj/Client.o: Client.cpp Client.h \
@@ -382,9 +373,6 @@ compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean
 
 ../build/Client/obj/moc_Client.o: ../build/Client/moc/moc_Client.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../build/Client/obj/moc_Client.o ../build/Client/moc/moc_Client.cpp
-
-../build/Client/obj/moc_InputWorker.o: ../build/Client/moc/moc_InputWorker.cpp 
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../build/Client/obj/moc_InputWorker.o ../build/Client/moc/moc_InputWorker.cpp
 
 ####### Install
 

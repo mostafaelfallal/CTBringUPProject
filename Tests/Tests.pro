@@ -10,19 +10,9 @@ INCLUDEPATH += $$PWD/../Server \
                $$PWD/..
 
 
-SOURCES += main.cpp \
-           Parser_Test.cpp \
-           Command_Test.cpp
+SOURCES += main.cpp 
+           
 
-SOURCES += $$PWD/../Server/Parser.cpp \
-           $$PWD/../Server/Command.cpp \
-           $$PWD/../Server/ClientContext.cpp \
-           $$PWD/../Server/Factory.cpp \
-           $$PWD/../Server/Server.cpp 
+SOURCES += 
 
-HEADERS += $$PWD/../Server/Parser.h \
-           $$PWD/../Server/Command.h \
-           $$PWD/../Server/ClientContext.h \
-           $$PWD/../Server/Factory.h \
-           $$PWD/../Server/Server.h \
-           $$PWD/../Server/ICommand.h \
+HEADERS += 
