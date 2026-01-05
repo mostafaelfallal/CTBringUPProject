@@ -10,9 +10,9 @@ INCLUDEPATH += $$PWD/../Server \
                $$PWD/..
 
 
-SOURCES += main.cpp 
+SOURCES += main.cpp CommandTest.cpp
            
 
-SOURCES += 
+SOURCES += ../Server/ClientContext.cpp ../Server/server.cpp ../Server/Builder.cpp ../Server/Command.cpp 
 
-HEADERS += 
+HEADERS += ../Server/Handler.h ../Server/Reader.h ../Server/CommandContext.h  ../Server/ClientContext.h ../Server/converter.h ../Server/server.h ../Common.h ../Client/JsonFormatter.h ../Client/Validator.h

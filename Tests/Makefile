@@ -52,8 +52,21 @@ OBJECTS_DIR   = ../build/Tests/obj/
 
 ####### Files
 
-SOURCES       = main.cpp 
-OBJECTS       = ../build/Tests/obj/main.o
+SOURCES       = main.cpp \
+		CommandTest.cpp \
+		../Server/ClientContext.cpp \
+		../Server/server.cpp \
+		../Server/Builder.cpp \
+		../Server/Command.cpp ../build/Tests/moc/moc_ClientContext.cpp \
+		../build/Tests/moc/moc_server.cpp
+OBJECTS       = ../build/Tests/obj/main.o \
+		../build/Tests/obj/CommandTest.o \
+		../build/Tests/obj/ClientContext.o \
+		../build/Tests/obj/server.o \
+		../build/Tests/obj/Builder.o \
+		../build/Tests/obj/Command.o \
+		../build/Tests/obj/moc_ClientContext.o \
+		../build/Tests/obj/moc_server.o
 DIST          = /usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt6/mkspecs/common/unix.conf \
 		/usr/lib/x86_64-linux-gnu/qt6/mkspecs/common/linux.conf \
@@ -123,7 +136,20 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/exceptions.prf \
 		/usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/yacc.prf \
 		/usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/lex.prf \
-		Tests.pro  main.cpp
+		Tests.pro ../Server/Handler.h \
+		../Server/Reader.h \
+		../Server/CommandContext.h \
+		../Server/ClientContext.h \
+		../Server/converter.h \
+		../Server/server.h \
+		../Common.h \
+		../Client/JsonFormatter.h \
+		../Client/Validator.h main.cpp \
+		CommandTest.cpp \
+		../Server/ClientContext.cpp \
+		../Server/server.cpp \
+		../Server/Builder.cpp \
+		../Server/Command.cpp
 QMAKE_TARGET  = Tests
 DESTDIR       = ../build/bin/
 TARGET        = ../build/bin/Tests
@@ -296,7 +322,8 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents /usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents main.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../Server/Handler.h ../Server/Reader.h ../Server/CommandContext.h ../Server/ClientContext.h ../Server/converter.h ../Server/server.h ../Common.h ../Client/JsonFormatter.h ../Client/Validator.h $(DISTDIR)/
+	$(COPY_FILE) --parents main.cpp CommandTest.cpp ../Server/ClientContext.cpp ../Server/server.cpp ../Server/Builder.cpp ../Server/Command.cpp $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -327,8 +354,28 @@ compiler_moc_predefs_clean:
 ../build/Tests/moc/moc_predefs.h: /usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/data/dummy.cpp
 	g++ -pipe -O2 -std=gnu++1z -Wall -Wextra -fPIC -dM -E -o ../build/Tests/moc/moc_predefs.h /usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/data/dummy.cpp
 
-compiler_moc_header_make_all:
+compiler_moc_header_make_all: ../build/Tests/moc/moc_ClientContext.cpp ../build/Tests/moc/moc_server.cpp
 compiler_moc_header_clean:
+	-$(DEL_FILE) ../build/Tests/moc/moc_ClientContext.cpp ../build/Tests/moc/moc_server.cpp
+../build/Tests/moc/moc_ClientContext.cpp: ../Server/ClientContext.h \
+		../Server/Handler.h \
+		../Server/CommandContext.h \
+		../Server/Response.h \
+		../Server/Result.h \
+		../build/Tests/moc/moc_predefs.h \
+		/usr/lib/qt6/libexec/moc
+	/usr/lib/qt6/libexec/moc $(DEFINES) --include /mnt/c/Users/Mostafa.elfallal/Documents/workspace/CTBringUPProject/build/Tests/moc/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -I/mnt/c/Users/Mostafa.elfallal/Documents/workspace/CTBringUPProject/Tests -I/mnt/c/Users/Mostafa.elfallal/Documents/workspace/CTBringUPProject/Server -I/mnt/c/Users/Mostafa.elfallal/Documents/workspace/CTBringUPProject/Client -I/mnt/c/Users/Mostafa.elfallal/Documents/workspace/CTBringUPProject -I/usr/include/x86_64-linux-gnu/qt6 -I/usr/include/x86_64-linux-gnu/qt6/QtNetwork -I/usr/include/x86_64-linux-gnu/qt6/QtCore -I/usr/include/c++/13 -I/usr/include/x86_64-linux-gnu/c++/13 -I/usr/include/c++/13/backward -I/usr/lib/gcc/x86_64-linux-gnu/13/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../Server/ClientContext.h -o ../build/Tests/moc/moc_ClientContext.cpp
+
+../build/Tests/moc/moc_server.cpp: ../Server/server.h \
+		../Server/ClientContext.h \
+		../Server/Handler.h \
+		../Server/CommandContext.h \
+		../Server/Response.h \
+		../Server/Result.h \
+		../build/Tests/moc/moc_predefs.h \
+		/usr/lib/qt6/libexec/moc
+	/usr/lib/qt6/libexec/moc $(DEFINES) --include /mnt/c/Users/Mostafa.elfallal/Documents/workspace/CTBringUPProject/build/Tests/moc/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -I/mnt/c/Users/Mostafa.elfallal/Documents/workspace/CTBringUPProject/Tests -I/mnt/c/Users/Mostafa.elfallal/Documents/workspace/CTBringUPProject/Server -I/mnt/c/Users/Mostafa.elfallal/Documents/workspace/CTBringUPProject/Client -I/mnt/c/Users/Mostafa.elfallal/Documents/workspace/CTBringUPProject -I/usr/include/x86_64-linux-gnu/qt6 -I/usr/include/x86_64-linux-gnu/qt6/QtNetwork -I/usr/include/x86_64-linux-gnu/qt6/QtCore -I/usr/include/c++/13 -I/usr/include/x86_64-linux-gnu/c++/13 -I/usr/include/c++/13/backward -I/usr/lib/gcc/x86_64-linux-gnu/13/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../Server/server.h -o ../build/Tests/moc/moc_server.cpp
+
 compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
 compiler_moc_source_make_all:
@@ -339,12 +386,76 @@ compiler_yacc_impl_make_all:
 compiler_yacc_impl_clean:
 compiler_lex_make_all:
 compiler_lex_clean:
-compiler_clean: compiler_moc_predefs_clean 
+compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean 
 
 ####### Compile
 
 ../build/Tests/obj/main.o: main.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../build/Tests/obj/main.o main.cpp
+
+../build/Tests/obj/CommandTest.o: CommandTest.cpp ../Server/converter.h \
+		../Server/Handler.h \
+		../Server/CommandContext.h \
+		../Server/Response.h \
+		../Server/Result.h \
+		../Common.h \
+		../Server/Server.h \
+		../Server/ClientContext.h \
+		../Client/Validator.h \
+		../Client/JsonFormatter.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../build/Tests/obj/CommandTest.o CommandTest.cpp
+
+../build/Tests/obj/ClientContext.o: ../Server/ClientContext.cpp ../Server/ClientContext.h \
+		../Server/Handler.h \
+		../Server/CommandContext.h \
+		../Server/Response.h \
+		../Server/Result.h \
+		../Server/Command.h \
+		../Server/ICommand.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../build/Tests/obj/ClientContext.o ../Server/ClientContext.cpp
+
+../build/Tests/obj/server.o: ../Server/server.cpp ../Server/Server.h \
+		../Server/ClientContext.h \
+		../Server/Handler.h \
+		../Server/CommandContext.h \
+		../Server/Response.h \
+		../Server/Result.h \
+		../Common.h \
+		../Server/Builder.h \
+		../Server/Command.h \
+		../Server/ICommand.h \
+		../Server/Reader.h \
+		../Server/converter.h \
+		../Server/Extractor.h \
+		../Server/Validator.h \
+		../Server/Writer.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../build/Tests/obj/server.o ../Server/server.cpp
+
+../build/Tests/obj/Builder.o: ../Server/Builder.cpp ../Server/Builder.h \
+		../Server/Handler.h \
+		../Server/CommandContext.h \
+		../Server/Response.h \
+		../Server/Result.h \
+		../Server/Command.h \
+		../Server/ICommand.h \
+		../Server/ClientContext.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../build/Tests/obj/Builder.o ../Server/Builder.cpp
+
+../build/Tests/obj/Command.o: ../Server/Command.cpp ../Server/Command.h \
+		../Server/ICommand.h \
+		../Server/ClientContext.h \
+		../Server/Handler.h \
+		../Server/CommandContext.h \
+		../Server/Response.h \
+		../Server/Result.h \
+		../Common.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../build/Tests/obj/Command.o ../Server/Command.cpp
+
+../build/Tests/obj/moc_ClientContext.o: ../build/Tests/moc/moc_ClientContext.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../build/Tests/obj/moc_ClientContext.o ../build/Tests/moc/moc_ClientContext.cpp
+
+../build/Tests/obj/moc_server.o: ../build/Tests/moc/moc_server.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../build/Tests/obj/moc_server.o ../build/Tests/moc/moc_server.cpp
 
 ####### Install
 
