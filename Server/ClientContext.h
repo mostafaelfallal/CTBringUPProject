@@ -8,7 +8,7 @@ class ClientContext : public QObject
 {
     Q_OBJECT
 public:
-    explicit ClientContext(QTcpSocket *socket, QObject *parent = nullptr);
+    explicit ClientContext(std::shared_ptr<Handler> chainHead, qintptr socketDescriptor);
     void sendMessage(const QByteArray &message);
     QTcpSocket *getSocket();
     bool getIsAuthenticated() const;
@@ -16,16 +16,19 @@ public:
 
 signals:
     void messageReceived(const QString &message, ClientContext *sender);
-    void disconnected(ClientContext *client);
+    void disconnected();
 
 private slots:
     void onReadyRead();
     void onSocketDisconnected();
+public slots:
+    void start();
 
 private:
+    qintptr m_socketDescriptor;
     QTcpSocket *m_socket;
     bool m_isAuthenticated = false;
-    std::unique_ptr<Handler> chainHead;
+    std::shared_ptr<Handler> chainHead;
 };
 
 #endif // CLIENTCONTEXT_H

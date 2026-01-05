@@ -37,15 +37,19 @@ Result AuthCommand::execute(CommandContext &commandCtx, ClientContext *clientCtx
     if (username == USERNAME && password == PASSWORD)
     {
         clientCtx->setIsAuthenticated(true);
+        commandCtx.response = std::make_unique<AuthResponse>();
         return Result::success();
     }
 
     clientCtx->setIsAuthenticated(false);
     return Result::error(401, "Authentication failed.");
 }
-Result CreateCommand::validate(CommandContext &commandCtx, ClientContext *)
+Result CreateCommand::validate(CommandContext &commandCtx, ClientContext *clientCtx)
 {
-    (void)commandCtx; // unused parameter
+    if (!clientCtx->getIsAuthenticated())
+    {
+        return Result::error(401, "Unauthorized. Please authenticate first.");
+    }
     if (commandCtx.args.size() < 1)
     {
         return Result::error(400, "Missing filename.");
@@ -56,9 +60,9 @@ Result CreateCommand::validate(CommandContext &commandCtx, ClientContext *)
     }
     return Result::success();
 }
-Result CreateCommand::execute(CommandContext &commandCtx, ClientContext *)
+Result CreateCommand::execute(CommandContext &commandCtx, ClientContext *clientCtx)
 {
-    (void)commandCtx; // unused parameter
+    Q_UNUSED(clientCtx);
     QString filename = commandCtx.args[0].toString();
     QFile file(filename);
     if (file.exists())
@@ -70,12 +74,16 @@ Result CreateCommand::execute(CommandContext &commandCtx, ClientContext *)
         return Result::error(500, "Failed to create file.");
     }
     file.close();
+    commandCtx.response = std::make_unique<CreateResponse>();
     return Result::success();
 }
 
 Result WriteCommand::validate(CommandContext &commandCtx, ClientContext *clientCtx)
 {
-    (void)clientCtx; // unused parameter
+    if (!clientCtx->getIsAuthenticated())
+    {
+        return Result::error(401, "Unauthorized. Please authenticate first.");
+    }
     if (commandCtx.args.size() < 2)
     {
         return Result::error(400, "Missing filename or content.");
@@ -89,7 +97,7 @@ Result WriteCommand::validate(CommandContext &commandCtx, ClientContext *clientC
 
 Result WriteCommand::execute(CommandContext &commandCtx, ClientContext *clientCtx)
 {
-    (void)clientCtx; // unused parameter
+    Q_UNUSED(clientCtx);
     QFile file(commandCtx.args[0].toString());
     if (!file.exists())
         return Result::error(404, "File not found.");
@@ -102,11 +110,15 @@ Result WriteCommand::execute(CommandContext &commandCtx, ClientContext *clientCt
     QTextStream out(&file);
     out << commandCtx.args[1].toString();
     file.close();
+    commandCtx.response = std::make_unique<WriteResponse>();
     return Result::success();
 }
 Result ReadCommand::validate(CommandContext &commandCtx, ClientContext *clientCtx)
 {
-    (void)clientCtx; // unused parameter
+    if (!clientCtx->getIsAuthenticated())
+    {
+        return Result::error(401, "Unauthorized. Please authenticate first.");
+    }
     if (commandCtx.args.size() < 1)
     {
         return Result::error(400, "Missing filename.");
@@ -119,7 +131,7 @@ Result ReadCommand::validate(CommandContext &commandCtx, ClientContext *clientCt
 }
 Result ReadCommand::execute(CommandContext &commandCtx, ClientContext *clientCtx)
 {
-    (void)clientCtx; // unused parameter
+    Q_UNUSED(clientCtx);
     QFile file(commandCtx.args[0].toString());
     if (!file.exists())
         return Result::error(404, "File not found.");
@@ -139,7 +151,10 @@ Result ReadCommand::execute(CommandContext &commandCtx, ClientContext *clientCtx
 
 Result AppendCommand::validate(CommandContext &commandCtx, ClientContext *clientCtx)
 {
-    (void)clientCtx; // unused parameter
+    if (!clientCtx->getIsAuthenticated())
+    {
+        return Result::error(401, "Unauthorized. Please authenticate first.");
+    }
     if (commandCtx.args.size() < 2)
     {
         return Result::error(400, "Missing filename or content.");
@@ -152,7 +167,7 @@ Result AppendCommand::validate(CommandContext &commandCtx, ClientContext *client
 }
 Result AppendCommand::execute(CommandContext &commandCtx, ClientContext *clientCtx)
 {
-    (void)clientCtx; // unused parameter
+    Q_UNUSED(clientCtx);
     QFile file(commandCtx.args[0].toString());
     if (!file.exists())
         return Result::error(404, "File not found.");
@@ -165,11 +180,15 @@ Result AppendCommand::execute(CommandContext &commandCtx, ClientContext *clientC
     QTextStream out(&file);
     out << commandCtx.args[1].toString();
     file.close();
+    commandCtx.response = std::make_unique<AppendResponse>();
     return Result::success();
 }
 Result DeleteCommand::validate(CommandContext &commandCtx, ClientContext *clientCtx)
 {
-    (void)clientCtx; // unused parameter
+    if (!clientCtx->getIsAuthenticated())
+    {
+        return Result::error(401, "Unauthorized. Please authenticate first.");
+    }
     if (commandCtx.args.size() < 1)
     {
         return Result::error(400, "Missing filename.");
@@ -182,26 +201,29 @@ Result DeleteCommand::validate(CommandContext &commandCtx, ClientContext *client
 }
 Result DeleteCommand::execute(CommandContext &commandCtx, ClientContext *clientCtx)
 {
-    (void)clientCtx; // unused parameter
+    Q_UNUSED(clientCtx);
     QFile file(commandCtx.args[0].toString());
     if (!file.exists())
         return Result::error(404, "File not found.");
 
     if (!file.remove())
         return Result::error(500, "Failed to delete file.");
-
+    commandCtx.response = std::make_unique<DeleteResponse>();
     return Result::success();
 }
 
 Result ListCommand::validate(CommandContext &commandCtx, ClientContext *clientCtx)
 {
-    (void)clientCtx;  // unused parameter
-    (void)commandCtx; // unused parameter
+    Q_UNUSED(commandCtx);
+    if (!clientCtx->getIsAuthenticated())
+    {
+        return Result::error(401, "Unauthorized. Please authenticate first.");
+    }
     return Result::success();
 }
 Result ListCommand::execute(CommandContext &commandCtx, ClientContext *clientCtx)
 {
-    (void)clientCtx; // unused parameter
+    Q_UNUSED(clientCtx);
     QDir dir(QDir::currentPath());
     QStringList files = dir.entryList(QDir::Files);
     commandCtx.response = std::make_unique<ListResponse>(files);
@@ -210,7 +232,10 @@ Result ListCommand::execute(CommandContext &commandCtx, ClientContext *clientCtx
 
 Result RenameCommand::validate(CommandContext &commandCtx, ClientContext *clientCtx)
 {
-    (void)clientCtx; // unused parameter
+    if (!clientCtx->getIsAuthenticated())
+    {
+        return Result::error(401, "Unauthorized. Please authenticate first.");
+    }
     if (commandCtx.args.size() < 2)
     {
         return Result::error(400, "Missing old or new filename.");
@@ -223,23 +248,27 @@ Result RenameCommand::validate(CommandContext &commandCtx, ClientContext *client
     {
         return Result::error(400, "Invalid new filename.");
     }
+
     return Result::success();
 }
 Result RenameCommand::execute(CommandContext &commandCtx, ClientContext *clientCtx)
 {
-    (void)clientCtx; // unused parameter
+    Q_UNUSED(clientCtx);
     QFile file(commandCtx.args[0].toString());
     if (!file.exists())
         return Result::error(404, "File not found.");
 
     if (!file.rename(commandCtx.args[1].toString()))
         return Result::error(500, "Failed to rename file.");
-
+    commandCtx.response = std::make_unique<RenameResponse>();
     return Result::success();
 }
 Result InfoCommand::validate(CommandContext &commandCtx, ClientContext *clientCtx)
 {
-    (void)clientCtx; // unused parameter
+    if (!clientCtx->getIsAuthenticated())
+    {
+        return Result::error(401, "Unauthorized. Please authenticate first.");
+    }
     if (commandCtx.args.size() < 1)
     {
         return Result::error(400, "Missing filename.");
@@ -252,7 +281,7 @@ Result InfoCommand::validate(CommandContext &commandCtx, ClientContext *clientCt
 }
 Result InfoCommand::execute(CommandContext &commandCtx, ClientContext *clientCtx)
 {
-    (void)clientCtx; // unused parameter
+    Q_UNUSED(clientCtx);
     QFile file(commandCtx.args[0].toString());
     if (!file.exists())
         return Result::error(404, "File not found.");

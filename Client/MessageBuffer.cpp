@@ -6,9 +6,10 @@ MessageBuffer::MessageBuffer(int size)
     m_buffer.resize(size);
 }
 
-void MessageBuffer::push(const QString& message)
+void MessageBuffer::push(const QString &message)
 {
-    if (m_count == m_maxSize) {
+    if (m_count == m_maxSize)
+    {
         qDebug() << "Buffer full! Dropping oldest:" << m_buffer[m_head];
         m_head = (m_head + 1) % m_maxSize;
         m_count--;
@@ -21,7 +22,8 @@ void MessageBuffer::push(const QString& message)
 
 QString MessageBuffer::pop()
 {
-    if (m_count == 0) return QString();
+    if (m_count == 0)
+        return QString();
 
     QString msg = m_buffer[m_head];
     m_head = (m_head + 1) % m_maxSize;

@@ -48,3 +48,55 @@ public:
         return content_.join(" ");
     }
 };
+
+class CreateResponse : public IResponse
+{
+public:
+    QString toText() const override
+    {
+        return "Created";
+    }
+};
+class AuthResponse : public IResponse
+{
+public:
+    QString toText() const override
+    {
+        return "Authenticated";
+    }
+};
+
+class DeleteResponse : public IResponse
+{
+public:
+    QString toText() const override
+    {
+        return "Deleted";
+    }
+};
+
+class AppendResponse : public IResponse
+{
+public:
+    QString toText() const override
+    {
+        return "Appended";
+    }
+};
+class WriteResponse : public IResponse
+{
+public:
+    QString toText() const override
+    {
+        return "Written";
+    }
+};
+
+class RenameResponse : public IResponse
+{
+public:
+    QString toText() const override
+    {
+        return "Renamed";
+    }
+};

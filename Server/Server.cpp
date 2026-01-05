@@ -1,34 +1,65 @@
 #include "Server.h"
 #include "../Common.h"
 #include "Builder.h"
-
+#include "Reader.h"
+#include "converter.h"
+#include "Extractor.h"
+#include "Validator.h"
+#include "Builder.h"
+#include "Command.h"
+#include "Writer.h"
+#include <QThread>
 Server::Server(QObject *parent)
-    : QObject(parent), server(new QTcpServer(this))
+    : QTcpServer(parent)
 {
-    connect(server, &QTcpServer::newConnection, this, &Server::onNewConnection);
-
-    if (server->listen(QHostAddress::Any, PORT))
+    if (listen(QHostAddress::Any, PORT))
     {
         qDebug() << "Server listening on port" << PORT;
+        // Create and Link the chain of responsibility
+        std::unique_ptr<Handler> reader = std::make_unique<Reader>();
+        std::unique_ptr<Handler> converter = std::make_unique<TextJsonConverter>();
+        std::unique_ptr<Handler> extractor = std::make_unique<Extractor>();
+        std::unique_ptr<Handler> validator = std::make_unique<ProtocolValidator>();
+        std::unique_ptr<Handler> builder = std::make_unique<CommandBuilder>();
+        std::unique_ptr<Handler> executor = std::make_unique<CommandExecutor>();
+        std::unique_ptr<Handler> objectConverter = std::make_unique<ObjectTextConverter>();
+        std::unique_ptr<Handler> writer = std::make_unique<Writer>();
+        // link from last to first
+        objectConverter->setNext(std::move(writer));
+        executor->setNext(std::move(objectConverter));
+        builder->setNext(std::move(executor));
+        extractor->setNext(std::move(builder));
+        validator->setNext(std::move(extractor));
+        converter->setNext(std::move(validator));
+        reader->setNext(std::move(converter));
+        chainHead = std::move(reader);
+        qDebug() << "Command processor chain created.";
     }
     else
     {
-        qDebug() << "Server failed:" << server->errorString();
+        qDebug() << "Server failed:" << errorString();
     }
 }
 
-void Server::onNewConnection()
+void Server::onClientDisconnected()
 {
-    QTcpSocket *socket = server->nextPendingConnection();
-    ClientContext *client = new ClientContext(socket, this);
-    m_clients.append(client);
-    connect(client, &ClientContext::disconnected, this, &Server::onClientDisconnected);
-    qDebug() << "New Client. Total:" << m_clients.size();
+    m_clientCounter--;
+    qDebug() << "Client disconnected. Total:" << m_clientCounter;
 }
-
-void Server::onClientDisconnected(ClientContext *client)
+// Override the incomingConnection method to handle new connections
+void Server::incomingConnection(qintptr socketDescriptor)
 {
-    m_clients.removeAll(client);
-    client->deleteLater();
-    qDebug() << "Client disconnected. Total:" << m_clients.size();
+    QThread *thread = new QThread(this);
+    ClientContext *client = new ClientContext(chainHead, socketDescriptor);
+    client->moveToThread(thread);
+    // link starting
+    connect(thread, &QThread::started, client, &ClientContext::start);
+    // link cleanup
+    connect(client, &ClientContext::disconnected, thread, &QThread::quit);
+    connect(thread, &QThread::finished, client, &QObject::deleteLater);
+    connect(thread, &QThread::finished, thread, &QObject::deleteLater);
+
+    thread->start();
+    m_clientCounter++;
+    qDebug() << "New Client. Total:" << m_clientCounter;
 }

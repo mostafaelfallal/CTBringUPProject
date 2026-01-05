@@ -1,36 +1,18 @@
 #include "ClientContext.h"
 #include <QDebug>
-#include "Reader.h"
-#include "converter.h"
-#include "Extractor.h"
-#include "Validator.h"
-#include "Builder.h"
 #include "Command.h"
-#include "Writer.h"
-ClientContext::ClientContext(QTcpSocket *socket, QObject *parent)
-    : QObject(parent), m_socket(socket)
+ClientContext::ClientContext(std::shared_ptr<Handler> chainHead, qintptr socketDescriptor)
+    : m_socketDescriptor(socketDescriptor), chainHead(chainHead)
 {
-    m_socket->setParent(this);
-    std::unique_ptr<Handler> reader = std::make_unique<Reader>();
-    std::unique_ptr<Handler> converter = std::make_unique<TextJsonConverter>();
-    std::unique_ptr<Handler> extractor = std::make_unique<Extractor>();
-    std::unique_ptr<Handler> validator = std::make_unique<ProtocolValidator>();
-    std::unique_ptr<Handler> builder = std::make_unique<CommandBuilder>();
-    std::unique_ptr<Handler> executor = std::make_unique<CommandExecutor>();
-    std::unique_ptr<Handler> objectConverter = std::make_unique<ObjectTextConverter>();
-    std::unique_ptr<Handler> writer = std::make_unique<Writer>();
-
-    // link from last to first
-    objectConverter->setNext(std::move(writer));
-    executor->setNext(std::move(objectConverter));
-    builder->setNext(std::move(executor));
-    validator->setNext(std::move(builder));
-    extractor->setNext(std::move(validator));
-    converter->setNext(std::move(extractor));
-    reader->setNext(std::move(converter));
-
-    chainHead = std::move(reader);
-
+}
+void ClientContext::start()
+{
+    m_socket = new QTcpSocket(); // created in worker thread
+    if (!m_socket->setSocketDescriptor(m_socketDescriptor))
+    {
+        emit disconnected();
+        return;
+    }
     connect(m_socket, &QTcpSocket::readyRead, this, &ClientContext::onReadyRead);
     connect(m_socket, &QTcpSocket::disconnected, this, &ClientContext::onSocketDisconnected);
 }
@@ -63,7 +45,7 @@ void ClientContext::onReadyRead()
 }
 void ClientContext::onSocketDisconnected()
 {
-    emit disconnected(this);
+    emit disconnected();
 }
 bool ClientContext::getIsAuthenticated() const
 {

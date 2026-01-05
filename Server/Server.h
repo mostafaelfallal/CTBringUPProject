@@ -6,19 +6,21 @@
 #include <QList>
 #include "ClientContext.h"
 
-class Server : public QObject
+class Server : public QTcpServer
 {
     Q_OBJECT
 public:
     explicit Server(QObject *parent = nullptr);
 
 private slots:
-    void onNewConnection();
-    void onClientDisconnected(ClientContext *client);
+    void onClientDisconnected();
 
 private:
-    QTcpServer *server;
-    QList<ClientContext *> m_clients;
+    uint32_t m_clientCounter = 0;
+    std::shared_ptr<Handler> chainHead;
+
+protected:
+    void incomingConnection(qintptr socketDescriptor) override;
 };
 
 #endif // SERVER_H

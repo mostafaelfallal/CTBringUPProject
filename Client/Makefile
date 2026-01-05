@@ -129,7 +129,9 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/yacc.prf \
 		/usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/lex.prf \
 		Client.pro Client.h \
-		MessageBuffer.h main.cpp \
+		MessageBuffer.h \
+		Validator.h \
+		JsonFormatter.h main.cpp \
 		Client.cpp \
 		MessageBuffer.cpp
 QMAKE_TARGET  = Client
@@ -304,7 +306,7 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents /usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents Client.h MessageBuffer.h $(DISTDIR)/
+	$(COPY_FILE) --parents Client.h MessageBuffer.h Validator.h JsonFormatter.h $(DISTDIR)/
 	$(COPY_FILE) --parents main.cpp Client.cpp MessageBuffer.cpp $(DISTDIR)/
 
 
@@ -365,7 +367,9 @@ compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean
 
 ../build/Client/obj/Client.o: Client.cpp Client.h \
 		MessageBuffer.h \
-		../Common.h
+		../Common.h \
+		JsonFormatter.h \
+		Validator.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../build/Client/obj/Client.o Client.cpp
 
 ../build/Client/obj/MessageBuffer.o: MessageBuffer.cpp MessageBuffer.h

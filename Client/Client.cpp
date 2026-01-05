@@ -1,5 +1,7 @@
 #include "Client.h"
 #include "../Common.h"
+#include "JsonFormatter.h"
+#include "Validator.h"
 Client::Client(QObject *parent)
     : QObject(parent), socket(new QTcpSocket(this)), notifier(nullptr)
 {
@@ -60,6 +62,13 @@ void Client::onUserInput()
         notifier->setEnabled(false);
         return;
     }
-
-    sendData(line);
+    QString action;
+    QStringList args;
+    if (!Validator::validateCommand(line, action, args))
+    {
+        qDebug() << "Invalid command format.";
+        return;
+    }
+    QJsonDocument doc = JsonFormatter::toJsonDoc(action, args);
+    sendData(doc.toJson(QJsonDocument::Compact));
 }
