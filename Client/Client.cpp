@@ -30,7 +30,7 @@ void Client::onConnected()
 
 void Client::onServerResponse()
 {
-    qDebug() << "Server:" << socket->readAll();
+    qDebug() << ">> " << socket->readAll();
 }
 
 void Client::sendData(const QString &text)
